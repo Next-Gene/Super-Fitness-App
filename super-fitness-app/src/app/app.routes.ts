@@ -45,6 +45,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/workouts/components/list/workout-list.component').then(m => m.WorkoutListComponent)
       },
       {
+        path: 'workouts/session/:id',
+        loadComponent: () => import('./features/workouts/components/active-session/active-session.component').then(m => m.ActiveSessionComponent)
+      },
+      {
         path: 'workouts/:id',
         loadComponent: () => import('./features/workouts/components/details/workout-details/workout-details').then(m => m.WorkoutDetailsComponent)
       },

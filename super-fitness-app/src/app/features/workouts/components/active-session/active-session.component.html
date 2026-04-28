@@ -1,0 +1,64 @@
+<div class="active-session-container">
+  <!-- Loading State -->
+  <div *ngIf="loading()" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading your session...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error()" class="error-state">
+    <i class="icon-warning"></i>
+    <p>{{ error() }}</p>
+    <button class="btn btn-outline" routerLink="/workouts">Go Back</button>
+  </div>
+
+  <!-- Session Content -->
+  <div *ngIf="!loading() && session()" class="session-content">
+    <div class="header-card glass-panel">
+      <div class="workout-info">
+        <span class="badge" [class]="session().difficulty.toLowerCase()">
+          {{ session().difficulty }}
+        </span>
+        <h1>{{ session().workoutName }}</h1>
+      </div>
+      
+      <div class="timer-container">
+        <div class="timer-display">{{ formattedTime() }}</div>
+        <p class="timer-label">Elapsed Time</p>
+      </div>
+    </div>
+
+    <div class="exercises-container">
+      <h2>Exercises</h2>
+      
+      <div class="exercise-card glass-panel" 
+           *ngFor="let exercise of session().exercises; let i = index"
+           [class.completed]="exercise.completed">
+        
+        <div class="exercise-header">
+          <div class="exercise-number">{{ i + 1 }}</div>
+          <div class="exercise-title">
+            <h3>{{ exercise.name }}</h3>
+            <p class="exercise-meta">
+              {{ exercise.sets }} Sets × {{ exercise.reps }} | Rest: {{ exercise.restTime }}s
+            </p>
+          </div>
+          
+          <button class="btn-check" 
+                  (click)="toggleExerciseComplete(exercise)"
+                  [class.active]="exercise.completed">
+            <svg *ngIf="exercise.completed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span *ngIf="!exercise.completed"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-bar glass-panel">
+      <button class="btn btn-danger" routerLink="/workouts">Abort</button>
+      <button class="btn btn-primary" (click)="finishWorkout()">Finish Workout</button>
+    </div>
+  </div>
+</div>

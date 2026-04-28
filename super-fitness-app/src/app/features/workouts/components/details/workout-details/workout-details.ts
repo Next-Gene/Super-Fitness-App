@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { WorkoutService } from '../../../../../core/services/workout.service';
 import { AuthService } from '../../../../../core/services/auth.service';
@@ -14,6 +14,7 @@ import { AuthService } from '../../../../../core/services/auth.service';
 })
 export class WorkoutDetailsComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly workoutService = inject(WorkoutService);
   private readonly authService = inject(AuthService);
   readonly location = inject(Location);
@@ -59,14 +60,19 @@ export class WorkoutDetailsComponent implements OnInit {
     this.isStarting.set(true);
     this.startError.set(null);
     this.workoutService.startWorkout(
-      workoutId,
+      Number(workoutId),
       this.selectedDifficulty(),
       this.plannedDuration()
     ).subscribe({
-      next: () => {
+      next: (response) => {
         this.isStarting.set(false);
         this.startSuccess.set(true);
-        setTimeout(() => this.startSuccess.set(false), 3000);
+        const sessionId = response?.data?.sessionId;
+        if (sessionId) {
+            this.router.navigate(['/workouts/session', sessionId]);
+        } else {
+            setTimeout(() => this.startSuccess.set(false), 3000);
+        }
       },
       error: (err) => {
         this.isStarting.set(false);

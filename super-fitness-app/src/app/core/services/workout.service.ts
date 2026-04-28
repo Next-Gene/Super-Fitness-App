@@ -160,7 +160,7 @@ export class WorkoutService implements OnDestroy {
 
   private readonly auth = inject(AuthService);
 
-  startWorkout(workoutId: string, difficulty: string = 'Medium', plannedDuration: number = 60): Observable<any> {
+  startWorkout(workoutId: number, difficulty: string = 'Medium', plannedDuration: number = 60): Observable<any> {
     const user = this.auth.currentUser();
 
     if (!user) {
@@ -171,6 +171,27 @@ export class WorkoutService implements OnDestroy {
     return this.api.post<any>(`/workouts/${workoutId}/start`, {
       difficulty,
       plannedDuration
+    }).pipe(
+      catchError(err => {
+        this._error.set(err.message);
+        throw err;
+      })
+    );
+  }
+
+  getWorkoutSession(sessionId: number | string): Observable<any> {
+    return this.api.get<any>(`/workouts/session/${sessionId}`).pipe(
+      catchError(err => {
+        this._error.set(err.message);
+        throw err;
+      })
+    );
+  }
+
+  completeWorkoutSession(sessionId: number | string, durationMinutes: number, caloriesBurned: number): Observable<any> {
+    return this.api.post<any>(`/workouts/session/${sessionId}/complete`, {
+      durationMinutes,
+      caloriesBurned
     }).pipe(
       catchError(err => {
         this._error.set(err.message);
