@@ -44,11 +44,13 @@ export class ProgressService implements OnDestroy {
   private readonly destroy$ = new Subject<void>();
 
   private readonly _progressRecords = signal<ProgressRecord[]>([]);
+  private readonly _recentWorkouts = signal<any[]>([]);
   private readonly _stats = signal<ProgressStats | null>(null);
   private readonly _loading = signal<boolean>(false);
   private readonly _error = signal<string | null>(null);
 
   readonly progressRecords = this._progressRecords.asReadonly();
+  readonly recentWorkouts = this._recentWorkouts.asReadonly();
   readonly stats = this._stats.asReadonly();
   readonly loading = this._loading.asReadonly();
   readonly error = this._error.asReadonly();
@@ -185,14 +187,25 @@ export class ProgressService implements OnDestroy {
       tap(response => {
         if (response) {
           this._stats.set({
-            totalWorkouts: response.workoutsCompleted || 0,
-            totalCalories: response.totalCaloriesBurned || 0,
-            currentStreak: response.currentStreak || 0,
-            longestStreak: response.currentStreak || 0,
-            weeklyWorkouts: response.workoutsCompleted || 0,
-            monthlyWorkouts: response.workoutsCompleted || 0,
-            averageDuration: response.totalWorkoutMinutes || 0
+            totalWorkouts: response.statistics?.totalWorkouts || 0,
+            totalCalories: response.statistics?.totalCaloriesBurned || 0,
+            currentStreak: response.statistics?.currentStreak || 0,
+            longestStreak: response.statistics?.longestStreak || 0,
+            weeklyWorkouts: response.statistics?.totalWorkouts || 0,
+            monthlyWorkouts: response.statistics?.totalWorkouts || 0,
+            averageDuration: response.statistics?.totalWorkoutMinutes || 0
           });
+
+          if (response.recentWorkouts) {
+            this._recentWorkouts.set(response.recentWorkouts.map((r: any) => ({
+              id: r.id,
+              name: 'Workout Session', // Placeholder since name isn't in Progress service
+              duration: r.durationMinutes,
+              calories: r.caloriesBurned,
+              performedAt: r.performedAt,
+              category: 'fitness'
+            })));
+          }
         }
       }),
       map(response => ({

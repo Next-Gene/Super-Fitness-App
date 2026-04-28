@@ -2,6 +2,7 @@ import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { ProgressService } from '../../../core/services/progress.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,23 +12,36 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
-  readonly authService = inject(AuthService);
+  private readonly authService = inject(AuthService);
+  private readonly progressService = inject(ProgressService);
+
   readonly user = this.authService.currentUser;
 
   readonly stats = signal({
-    totalWorkouts: 12,
-    totalCalories: 2400,
-    currentStreak: 5,
-    weeklyWorkouts: 4
+    totalWorkouts: 0,
+    totalCalories: 0,
+    currentStreak: 0,
+    weeklyWorkouts: 0
   });
 
-  readonly recentWorkouts = signal([
-    { id: '1', name: 'Morning HIIT', duration: 30, calories: 350, category: 'hiit' },
-    { id: '2', name: 'Full Body Strength', duration: 45, calories: 420, category: 'strength' },
-    { id: '3', name: 'Cardio Blast', duration: 25, calories: 280, category: 'cardio' }
-  ]);
+  readonly recentWorkouts = this.progressService.recentWorkouts;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadStats();
+  }
+
+  loadStats(): void {
+    this.progressService.getProgressStats().subscribe(data => {
+      if (data) {
+        this.stats.set({
+          totalWorkouts: data.totalWorkouts,
+          totalCalories: data.totalCalories,
+          currentStreak: data.currentStreak,
+          weeklyWorkouts: data.weeklyWorkouts
+        });
+      }
+    });
+  }
 
   getInitials(): string {
     const user = this.user();
