@@ -101,6 +101,14 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
     this.showCreateForm.update(v => !v);
   }
 
+  openVideo(event: Event, videoUrl?: string): void {
+    if (videoUrl) {
+      event.preventDefault();
+      event.stopPropagation();
+      window.open(videoUrl, '_blank');
+    }
+  }
+
   createWorkout(): void {
     const data = this.newWorkout();
     if (!data.name || !data.category) return;

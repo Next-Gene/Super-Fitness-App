@@ -244,7 +244,8 @@ export class WorkoutService implements OnDestroy {
       imageUrl: w.imageUrl,
       rating: w.rating,
       isPremium: w.isPremium,
-      workoutPlanId: w.workoutPlanId
+      workoutPlanId: w.workoutPlanId,
+      videoUrl: w.videoUrl
     };
   }
 

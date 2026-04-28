@@ -40,6 +40,13 @@ export class WorkoutDetailsComponent implements OnInit {
     this.location.back();
   }
 
+  openVideo() {
+    const videoUrl = this.workout()?.videoUrl;
+    if (videoUrl) {
+      window.open(videoUrl, '_blank');
+    }
+  }
+
   startWorkout() {
     const workoutId = this.workout()?.id;
     if (!workoutId) return;

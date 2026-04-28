@@ -13,6 +13,7 @@ export interface Workout {
   rating?: number;
   isPremium?: boolean;
   workoutPlanId?: number;
+  videoUrl?: string;
 }
 
 export interface Exercise {

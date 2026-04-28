@@ -37,8 +37,8 @@
         <p class="description">{{ workout()?.description }}</p>
 
         <!-- Video Section -->
-        <div class="video-section" *ngIf="workout()?.imageUrl || workout()?.workoutPlanId">
-          <a *ngIf="workout()?.workoutPlanId" class="video-link" href="#" (click)="$event.preventDefault()">
+        <div class="video-section" *ngIf="workout()?.videoUrl">
+          <a class="video-link" href="javascript:void(0)" (click)="openVideo()">
             <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
               <polygon points="5 3 19 12 5 21 5 3"/>
             </svg>
