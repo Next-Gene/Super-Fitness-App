@@ -89,38 +89,86 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
-  padding: 2.5rem;
+  overflow: hidden;
   backdrop-filter: blur(10px);
   margin-bottom: 2rem;
+}
 
-  .workout-badge {
-    display: inline-block;
-    padding: 0.4rem 1rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
+.workout-header-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+}
 
-    &.strength { background: linear-gradient(135deg, #dc2626, #b91c1c); }
-    &.cardio { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
-    &.hiit { background: linear-gradient(135deg, #ea580c, #c2410c); }
-  }
+.workout-header-image.no-image {
+  background: linear-gradient(135deg, #e94560, #ff6b6b);
+}
 
-  h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 1rem;
-  }
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(15,15,26,0.95) 100%);
+}
 
-  .description {
-    color: #a0a0a0;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
+.header-content {
+  padding: 1.5rem 2.5rem 2.5rem;
+}
+
+.workout-badge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  position: relative;
+  z-index: 1;
+
+  &.strength { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+  &.cardio { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+  &.hiit { background: linear-gradient(135deg, #ea580c, #c2410c); }
+}
+
+.header-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: #a0a0a0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.video-section {
+  margin-bottom: 1.5rem;
+}
+
+.video-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(233, 69, 96, 0.15);
+  border: 1px solid rgba(233, 69, 96, 0.3);
+  border-radius: 10px;
+  color: #e94560;
+  font-weight: 500;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(233, 69, 96, 0.25);
+    transform: translateY(-2px);
   }
 }
 
@@ -177,6 +225,135 @@
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.start-workout-form {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+
+  h3 {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group {
+    label {
+      display: block;
+      color: #a0a0a0;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+
+      &:focus {
+        border-color: #e94560;
+      }
+    }
+
+    select option {
+      background: #1a1a2e;
+    }
+  }
+
+  .btn-start {
+    margin-top: 1rem;
+  }
+
+  .success-message {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 10px;
+    color: #22c55e;
+    text-align: center;
+  }
+
+  .error-message {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 10px;
+    color: #ef4444;
+    text-align: center;
+  }
+}
+
+.workout-plan-section {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+
+  h2 {
+    color: #fff;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .plan-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+
+    .plan-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(233, 69, 96, 0.1);
+      border-radius: 12px;
+
+      svg {
+        width: 24px;
+        height: 24px;
+        color: #e94560;
+      }
+    }
+
+    .plan-details {
+      h4 {
+        color: #fff;
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+      }
+
+      p {
+        color: #a0a0a0;
+        font-size: 0.85rem;
+      }
+    }
   }
 }
 

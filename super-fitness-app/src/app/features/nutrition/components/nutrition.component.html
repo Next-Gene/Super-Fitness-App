@@ -89,11 +89,15 @@
       </div>
 
       <div class="meals-grid">
-        <div *ngFor="let meal of getFilteredMeals(); let i = index" 
+        <a *ngFor="let meal of getFilteredMeals(); let i = index" 
              class="meal-card"
+             [routerLink]="['/nutrition/meals', meal.id]"
              [style.animation-delay]="i * 50 + 'ms'">
-          <div class="meal-image" [class]="meal.mealType.toLowerCase()">
+          <div class="meal-image" 
+               [style.background-image]="meal.imageUrl ? 'url(' + meal.imageUrl + ')' : (getMealGradient(meal.mealType))"
+               [class.has-image]="meal.imageUrl">
             <span class="meal-type">{{ meal.mealType }}</span>
+            <div class="image-overlay"></div>
           </div>
           <div class="meal-body">
             <h3>{{ meal.name }}</h3>
@@ -105,7 +109,7 @@
             </div>
             <button class="add-btn">+ Add to Today</button>
           </div>
-        </div>
+        </a>
 
         <div *ngIf="getFilteredMeals().length === 0" class="empty-state">
           <div class="empty-icon">

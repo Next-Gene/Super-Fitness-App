@@ -23,7 +23,23 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
   selectedCategory: WorkoutCategory | '' = '';
   selectedDifficulty: Difficulty | '' = '';
 
-  readonly categories: { value: WorkoutCategory | ''; label: string }[] = [
+  showCreateForm = signal<boolean>(false);
+  isCreating = signal<boolean>(false);
+  createSuccess = signal<boolean>(false);
+
+  newWorkout = signal({
+    name: '',
+    description: '',
+    caloriesBurn: 500,
+    isPremium: false,
+    rating: 4.5,
+    durationInMinutes: 60,
+    difficulty: 'Medium',
+    category: 'Strength',
+    workoutPlanId: 1
+  });
+
+  readonly categories: { value: string; label: string }[] = [
     { value: '', label: 'All Categories' },
     { value: 'strength', label: 'Strength' },
     { value: 'cardio', label: 'Cardio' },
@@ -33,12 +49,7 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
     { value: 'recovery', label: 'Recovery' }
   ];
 
-  readonly difficulties: { value: Difficulty | ''; label: string }[] = [
-    { value: '', label: 'All Levels' },
-    { value: 'beginner', label: 'Beginner' },
-    { value: 'intermediate', label: 'Intermediate' },
-    { value: 'advanced', label: 'Advanced' }
-  ];
+  readonly difficulties = ['Beginner', 'Easy', 'Medium', 'Hard', 'Advanced'];
 
   private readonly filteredWorkouts = signal<Workout[]>([]);
 
@@ -84,6 +95,29 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
       );
       this.filteredWorkouts.set(filtered);
     }
+  }
+
+  toggleCreateForm(): void {
+    this.showCreateForm.update(v => !v);
+  }
+
+  createWorkout(): void {
+    const data = this.newWorkout();
+    if (!data.name || !data.category) return;
+
+    this.isCreating.set(true);
+    this.workoutService.createWorkout(data).subscribe({
+      next: () => {
+        this.isCreating.set(false);
+        this.createSuccess.set(true);
+        this.showCreateForm.set(false);
+        this.loadWorkouts();
+        setTimeout(() => this.createSuccess.set(false), 3000);
+      },
+      error: () => {
+        this.isCreating.set(false);
+      }
+    });
   }
 
   ngOnDestroy(): void {}

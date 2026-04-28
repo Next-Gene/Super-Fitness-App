@@ -23,14 +23,30 @@
     </div>
 
     <div class="workout-header-card">
-      <div class="workout-badge" [class]="workout()?.category">
-        {{ workout()?.category }}
+      <div class="workout-header-image" 
+           [style.background-image]="workout()?.imageUrl ? 'url(' + workout()?.imageUrl + ')' : ''"
+           [class.no-image]="!workout()?.imageUrl">
+        <div class="image-overlay"></div>
+        <div class="workout-badge" [class]="workout()?.category">
+          {{ workout()?.category }}
+        </div>
       </div>
       
-      <h1>{{ workout()?.name }}</h1>
-      <p class="description">{{ workout()?.description }}</p>
+      <div class="header-content">
+        <h1>{{ workout()?.name }}</h1>
+        <p class="description">{{ workout()?.description }}</p>
 
-      <div class="workout-meta">
+        <!-- Video Section -->
+        <div class="video-section" *ngIf="workout()?.imageUrl || workout()?.workoutPlanId">
+          <a *ngIf="workout()?.workoutPlanId" class="video-link" href="#" (click)="$event.preventDefault()">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            Watch Workout Video
+          </a>
+        </div>
+
+        <div class="workout-meta">
         <div class="meta-item">
           <span class="label">Difficulty</span>
           <span class="value difficulty" [class]="workout()?.difficulty">{{ workout()?.difficulty }}</span>
@@ -44,9 +60,52 @@
           <span class="value">{{ workout()?.caloriesBurned }} kcal</span>
         </div>
       </div>
+      </div>
 
-      <div class="action-bar">
-        <button class="btn-start">Start Workout</button>
+      <!-- Start Workout Form -->
+      <div class="start-workout-form">
+        <h3>Start This Workout</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Select Difficulty</label>
+            <select [(ngModel)]="selectedDifficulty">
+              <option *ngFor="let diff of difficulties" [value]="diff">{{ diff }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Planned Duration (min)</label>
+            <input type="number" [(ngModel)]="plannedDuration" min="10" max="180">
+          </div>
+        </div>
+        <button class="btn-start" 
+                (click)="startWorkout()" 
+                [disabled]="isStarting()">
+          <span *ngIf="!isStarting()">Start Workout</span>
+          <span *ngIf="isStarting()">Starting...</span>
+        </button>
+        <div *ngIf="startSuccess()" class="success-message">
+          Workout started successfully!
+        </div>
+        <div *ngIf="startError()" class="error-message">
+          {{ startError() }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Workout Plan Section -->
+    <div class="workout-plan-section" *ngIf="workout()?.workoutPlanId">
+      <h2>Workout Plan</h2>
+      <div class="plan-card">
+        <div class="plan-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+        </div>
+        <div class="plan-details">
+          <h4>Plan #{{ workout()?.workoutPlanId }}</h4>
+          <p>Follow this workout plan for optimal results</p>
+        </div>
       </div>
     </div>
 

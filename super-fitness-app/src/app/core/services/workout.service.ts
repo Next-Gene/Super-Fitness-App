@@ -36,6 +36,10 @@ export interface WorkoutApiResponse {
   isPremium: boolean;
   workoutPlanId?: number;
   exerciseCount?: number;
+  imageUrl?: string;
+  videoUrl?: string;
+  targetMuscles?: string;
+  equipmentNeeded?: string;
 }
 
 @Injectable({
@@ -225,7 +229,7 @@ export class WorkoutService implements OnDestroy {
       duration: w.duration || 0,
       caloriesBurned: w.caloriesBurn,
       exercises: [],
-      imageUrl: undefined,
+      imageUrl: w.imageUrl,
       rating: w.rating,
       isPremium: w.isPremium,
       workoutPlanId: w.workoutPlanId

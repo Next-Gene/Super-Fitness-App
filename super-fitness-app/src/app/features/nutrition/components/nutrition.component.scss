@@ -270,14 +270,25 @@
 }
 
 .meal-image {
-  height: 100px;
+  height: 120px;
   position: relative;
+  background-size: cover;
+  background-position: center;
 }
 
-.meal-image.breakfast { background: linear-gradient(135deg, #f7c531, #fbbf24); }
-.meal-image.lunch { background: linear-gradient(135deg, #00ff88, #00cc6a); }
-.meal-image.dinner { background: linear-gradient(135deg, #e94560, #ff6b6b); }
-.meal-image.snack { background: linear-gradient(135deg, #a855f7, #9333ea); }
+.meal-image.no-image {
+  &.breakfast { background: linear-gradient(135deg, #f7c531, #fbbf24); }
+  &.lunch { background: linear-gradient(135deg, #00ff88, #00cc6a); }
+  &.dinner { background: linear-gradient(135deg, #e94560, #ff6b6b); }
+  &.snack { background: linear-gradient(135deg, #a855f7, #9333ea); }
+  &-default { background: linear-gradient(135deg, #64748b, #94a3b8); }
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 100%);
+}
 
 .meal-type {
   position: absolute;

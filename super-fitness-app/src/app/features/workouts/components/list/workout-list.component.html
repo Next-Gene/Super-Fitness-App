@@ -11,10 +11,87 @@
         <h1>Workouts</h1>
         <p>Find your perfect training session</p>
       </div>
+      <button class="add-new-btn" (click)="toggleCreateForm()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+        {{ showCreateForm() ? 'Cancel' : 'Create Workout' }}
+      </button>
+    </div>
+
+    <!-- Create Workout Form -->
+    <div class="create-form-container" *ngIf="showCreateForm()">
+      <div class="create-form-card">
+        <h2>Create New Workout</h2>
+        <form (ngSubmit)="createWorkout()">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Workout Name</label>
+              <input type="text" [(ngModel)]="newWorkout().name" name="name" placeholder="Enter workout name" required>
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select [(ngModel)]="newWorkout().category" name="category">
+                <option *ngFor="let cat of categories.slice(1)" [value]="cat.value">{{ cat.label }}</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Description</label>
+            <textarea [(ngModel)]="newWorkout().description" name="description" placeholder="Describe the workout" rows="3"></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Difficulty</label>
+              <select [(ngModel)]="newWorkout().difficulty" name="difficulty">
+                <option *ngFor="let diff of difficulties" [value]="diff">{{ diff }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Duration (min)</label>
+              <input type="number" [(ngModel)]="newWorkout().durationInMinutes" name="durationInMinutes" min="10" max="180">
+            </div>
+            <div class="form-group">
+              <label>Calories Burn</label>
+              <input type="number" [(ngModel)]="newWorkout().caloriesBurn" name="caloriesBurn" min="50" max="2000">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Rating</label>
+              <input type="number" [(ngModel)]="newWorkout().rating" name="rating" min="1" max="5" step="0.5">
+            </div>
+            <div class="form-group">
+              <label>Workout Plan ID</label>
+              <input type="number" [(ngModel)]="newWorkout().workoutPlanId" name="workoutPlanId" min="1">
+            </div>
+            <div class="form-group checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" [(ngModel)]="newWorkout().isPremium" name="isPremium">
+                <span>Premium Workout</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="create-btn" [disabled]="isCreating() || !newWorkout().name">
+              <span *ngIf="!isCreating()">Create Workout</span>
+              <span *ngIf="isCreating()">Creating...</span>
+            </button>
+          </div>
+
+          <div *ngIf="createSuccess()" class="success-message">
+            Workout created successfully!
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- Filters -->
-    <div class="filters-bar">
+    <div class="filters-bar" *ngIf="!showCreateForm()">
       <div class="search-box">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="11" cy="11" r="8"/>
@@ -29,7 +106,7 @@
         </select>
 
         <select [(ngModel)]="selectedDifficulty" (change)="loadWorkouts()">
-          <option *ngFor="let diff of difficulties" [value]="diff.value">{{ diff.label }}</option>
+          <option *ngFor="let diff of difficulties" [value]="diff">{{ diff }}</option>
         </select>
       </div>
     </div>
@@ -41,7 +118,11 @@
            [routerLink]="['/workouts', workout.id]"
            [style.animation-delay]="i * 50 + 'ms'">
         
-        <div class="workout-image" [class]="workout.category">
+        <div class="workout-image" 
+             [style.background-image]="workout.imageUrl ? 'url(' + workout.imageUrl + ')' : ''"
+             [class.no-image]="!workout.imageUrl"
+             [class]="workout.category">
+          <div class="image-overlay"></div>
           <div class="category-badge">{{ workout.category }}</div>
           <div class="play-icon">
             <svg viewBox="0 0 24 24" fill="currentColor">

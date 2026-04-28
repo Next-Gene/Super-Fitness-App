@@ -57,6 +57,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/nutrition/components/nutrition.component').then(m => m.NutritionComponent)
       },
       {
+        path: 'nutrition/meals/:id',
+        loadComponent: () => import('./features/nutrition/components/meal-details/meal-details.component').then(m => m.MealDetailsComponent)
+      },
+      {
         path: 'profile',
         loadComponent: () => import('./features/profile/components/profile/profile.component').then(m => m.ProfileComponent)
       },

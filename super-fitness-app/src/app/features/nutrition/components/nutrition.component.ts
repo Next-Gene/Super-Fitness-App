@@ -1,12 +1,13 @@
 import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NutritionService } from '../../../core/services/nutrition.service';
 
 @Component({
   selector: 'app-nutrition',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './nutrition.component.html',
   styleUrl: './nutrition.component.scss'
 })
@@ -62,6 +63,16 @@ export class NutritionComponent implements OnInit, OnDestroy {
     } else {
       return Math.min((nutrition.fat / (nutrition.fatGoal || 65)) * 100, 100);
     }
+  }
+
+  getMealGradient(mealType: string): string {
+    const gradients: { [key: string]: string } = {
+      'Breakfast': 'linear-gradient(135deg, #f7c531, #fbbf24)',
+      'Lunch': 'linear-gradient(135deg, #00ff88, #00cc6a)',
+      'Dinner': 'linear-gradient(135deg, #e94560, #ff6b6b)',
+      'Snack': 'linear-gradient(135deg, #a855f7, #9333ea)'
+    };
+    return gradients[mealType] || 'linear-gradient(135deg, #64748b, #94a3b8)';
   }
 
   ngOnDestroy(): void {}

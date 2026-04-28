@@ -1,0 +1,187 @@
+<div class="page-container">
+  <div class="page-background">
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+  </div>
+
+  <div class="page-content" *ngIf="loading()">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading meal details...</p>
+    </div>
+  </div>
+
+  <div class="page-content" *ngIf="!loading() && mealDetails()">
+    <div class="back-nav">
+      <button class="back-btn" (click)="goBack()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+        Back to Nutrition
+      </button>
+    </div>
+
+    <div class="meal-header-card">
+      <div class="meal-header-image" [style.background-image]="'url(' + mealDetails()?.imageUrl + ')'">
+        <div class="image-overlay"></div>
+        <div class="header-badges">
+          <span class="meal-badge" [class]="mealDetails()?.mealType?.toLowerCase()">
+            {{ mealDetails()?.mealType }}
+          </span>
+          <span class="premium-badge" *ngIf="mealDetails()?.isPremium">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Premium
+          </span>
+        </div>
+      </div>
+      
+      <div class="header-content">
+        <h1>{{ mealDetails()?.name }}</h1>
+        <p class="description">{{ mealDetails()?.description }}</p>
+        
+        <div class="meta-stats">
+          <div class="meta-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            <span class="value">{{ mealDetails()?.prepTime }}</span>
+            <span class="label">mins</span>
+          </div>
+          <div class="meta-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20v-6M6 20V10M18 20V4"/>
+            </svg>
+            <span class="value">{{ mealDetails()?.difficulty }}</span>
+            <span class="label">level</span>
+          </div>
+          <div class="meta-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+            </svg>
+            <span class="value">{{ mealDetails()?.servings }}</span>
+            <span class="label">servings</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <div class="tags-section" *ngIf="mealDetails()?.tags?.length">
+          <span class="tag" *ngFor="let tag of mealDetails()?.tags">{{ tag }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nutrition Card -->
+    <div class="nutrition-card">
+      <h2>Nutrition Facts</h2>
+      <p class="servings-label">Per serving</p>
+      <div class="nutrition-grid">
+        <div class="nutri-item calories">
+          <div class="nutri-value">{{ mealDetails()?.nutrition?.calories }}</div>
+          <div class="nutri-label">Calories</div>
+          <div class="nutri-bar">
+            <div class="bar-fill" [style.width.%]="getPercent(mealDetails()?.nutrition?.calories, 2000)"></div>
+          </div>
+        </div>
+        <div class="nutri-item protein">
+          <div class="nutri-value">{{ mealDetails()?.nutrition?.protein }}g</div>
+          <div class="nutri-label">Protein</div>
+          <div class="nutri-bar">
+            <div class="bar-fill" [style.width.%]="getPercent(mealDetails()?.nutrition?.protein, 150)"></div>
+          </div>
+        </div>
+        <div class="nutri-item carbs">
+          <div class="nutri-value">{{ mealDetails()?.nutrition?.carbs }}g</div>
+          <div class="nutri-label">Carbs</div>
+          <div class="nutri-bar">
+            <div class="bar-fill" [style.width.%]="getPercent(mealDetails()?.nutrition?.carbs, 250)"></div>
+          </div>
+        </div>
+        <div class="nutri-item fats">
+          <div class="nutri-value">{{ mealDetails()?.nutrition?.fats }}g</div>
+          <div class="nutri-label">Fat</div>
+          <div class="nutri-bar">
+            <div class="bar-fill" [style.width.%]="getPercent(mealDetails()?.nutrition?.fats, 65)"></div>
+          </div>
+        </div>
+        <div class="nutri-item fiber">
+          <div class="nutri-value">{{ mealDetails()?.nutrition?.fiber }}g</div>
+          <div class="nutri-label">Fiber</div>
+          <div class="nutri-bar">
+            <div class="bar-fill" [style.width.%]="getPercent(mealDetails()?.nutrition?.fiber, 30)"></div>
+          </div>
+        </div>
+        <div class="nutri-item sugar">
+          <div class="nutri-value">{{ mealDetails()?.nutrition?.sugar }}g</div>
+          <div class="nutri-label">Sugar</div>
+          <div class="nutri-bar">
+            <div class="bar-fill" [style.width.%]="getPercent(mealDetails()?.nutrition?.sugar, 50)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ingredients Card -->
+    <div class="ingredients-card" *ngIf="mealDetails()?.ingredients?.length">
+      <h2>Ingredients</h2>
+      <div class="ingredients-list">
+        <div *ngFor="let ing of mealDetails()?.ingredients; let i = index" class="ingredient-item">
+          <div class="ing-number">{{ i + 1 }}</div>
+          <div class="ing-info">
+            <span class="ing-name">{{ ing.name }}</span>
+            <span class="ing-amount">{{ ing.amount }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Allergens Card -->
+    <div class="allergens-card" *ngIf="mealDetails()?.allergens?.length">
+      <h2>Allergens</h2>
+      <div class="allergens-list">
+        <span class="allergen-tag" *ngFor="let allergen of mealDetails()?.allergens">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 9v2m0 4h.01"/>
+            <circle cx="12" cy="12" r="10"/>
+          </svg>
+          {{ allergen }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Variations Card -->
+    <div class="variations-card" *ngIf="mealDetails()?.variations">
+      <h2>Difficulty Variations</h2>
+      <div class="variations-list">
+        <div class="variation-item" *ngFor="let v of getVariationKeys()">
+          <div class="var-header">
+            <span class="var-name">{{ mealDetails()?.variations?.[v]?.name }}</span>
+            <span class="var-calories">{{ mealDetails()?.variations?.[v]?.calories }} kcal</span>
+          </div>
+          <p class="var-mods">{{ mealDetails()?.variations?.[v]?.modifications?.join(', ') }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn-add-full">Add to Today's Meals</button>
+    </div>
+  </div>
+
+  <div class="page-content" *ngIf="!loading() && !mealDetails()">
+    <div class="empty-state">
+      <div class="empty-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M18 8h1a4 4 0 010 8h-1"/>
+          <path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/>
+        </svg>
+      </div>
+      <h3>Meal not found</h3>
+      <p>The meal you're looking for doesn't exist.</p>
+      <button class="back-btn" (click)="goBack()">Go Back</button>
+    </div>
+  </div>
+</div>

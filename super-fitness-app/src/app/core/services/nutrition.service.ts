@@ -18,21 +18,28 @@ export interface MealRecommendation {
   };
 }
 
-export interface MealDetails {
+export interface MealDetailsResponse {
   id: number;
   name: string;
   description: string;
   mealType: string;
-  prepTimeInMinutes: number;
+  prepTime: number;
   difficulty: string;
-  nutritionFacts: {
+  imageUrl?: string;
+  isPremium: boolean;
+  servings: number;
+  nutrition: {
     calories: number;
     protein: number;
     carbs: number;
     fats: number;
     fiber: number;
+    sugar: number;
   };
-  ingredients: any[];
+  ingredients: { name: string; amount: string }[];
+  tags: string[];
+  allergens: string[];
+  variations: any;
 }
 
 export interface RandomMealSuggestion {
@@ -96,6 +103,7 @@ export class NutritionService implements OnDestroy {
             mealType: (m.mealType as MealType) || 'lunch',
             ingredients: [],
             createdAt: new Date().toISOString(),
+            imageUrl: m.imageUrl,
             nutritionFacts: {
               calories: m.nutritionFacts?.calories || m.calories || 0,
               protein: m.nutritionFacts?.protein || m.protein || 0,
@@ -123,6 +131,7 @@ export class NutritionService implements OnDestroy {
             mealType: (m.mealType as MealType) || 'lunch',
             ingredients: [],
             createdAt: new Date().toISOString(),
+            imageUrl: m.imageUrl,
             nutritionFacts: {
               calories: m.nutritionFacts?.calories || m.calories || 0,
               protein: m.nutritionFacts?.protein || m.protein || 0,
@@ -170,16 +179,17 @@ export class NutritionService implements OnDestroy {
     }));
   }
 
-  getMealDetails(id: number): Observable<MealDetails> {
+  getMealDetails(id: number): Observable<MealDetailsResponse> {
     this._loading.set(true);
 
-    return this.api.get<MealDetails>(`/nutrition/meals/${id}`).pipe(
+    return this.api.get<{ data: MealDetailsResponse }>(`/nutrition/meals/${id}`).pipe(
+      map(response => response?.data),
+      tap(() => this._loading.set(false)),
       catchError(err => {
         this._error.set(err.message);
         this._loading.set(false);
         throw err;
-      }),
-      tap(() => this._loading.set(false))
+      })
     );
   }
 

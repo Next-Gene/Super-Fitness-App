@@ -1,22 +1,33 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { WorkoutService } from '../../../../../core/services/workout.service';
+import { AuthService } from '../../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-workout-details',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './workout-details.html',
   styleUrl: './workout-details.scss',
 })
 export class WorkoutDetailsComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly workoutService = inject(WorkoutService);
+  private readonly authService = inject(AuthService);
   readonly location = inject(Location);
 
   readonly workout = this.workoutService.currentWorkout;
   readonly loading = this.workoutService.loading;
+
+  selectedDifficulty = signal<string>('Medium');
+  plannedDuration = signal<number>(60);
+  isStarting = signal<boolean>(false);
+  startSuccess = signal<boolean>(false);
+  startError = signal<string | null>(null);
+
+  difficulties = ['Beginner', 'Easy', 'Medium', 'Hard', 'Advanced'];
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -27,5 +38,33 @@ export class WorkoutDetailsComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  startWorkout() {
+    const workoutId = this.workout()?.id;
+    if (!workoutId) return;
+
+    if (!this.authService.isAuthenticated()) {
+      this.startError.set('Please login to start workout');
+      return;
+    }
+
+    this.isStarting.set(true);
+    this.startError.set(null);
+    this.workoutService.startWorkout(
+      workoutId,
+      this.selectedDifficulty(),
+      this.plannedDuration()
+    ).subscribe({
+      next: () => {
+        this.isStarting.set(false);
+        this.startSuccess.set(true);
+        setTimeout(() => this.startSuccess.set(false), 3000);
+      },
+      error: (err) => {
+        this.isStarting.set(false);
+        this.startError.set(err?.error?.message || err?.message || 'Failed to start workout');
+      }
+    });
   }
 }
