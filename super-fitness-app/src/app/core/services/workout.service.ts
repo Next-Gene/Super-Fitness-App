@@ -162,17 +162,15 @@ export class WorkoutService implements OnDestroy {
 
   startWorkout(workoutId: string, difficulty: string = 'Medium', plannedDuration: number = 60): Observable<any> {
     const user = this.auth.currentUser();
-    const userId = user?.id;
 
-    if (!userId) {
+    if (!user) {
       this._error.set('User must be logged in to start a workout.');
       return of(null);
     }
 
     return this.api.post<any>(`/workouts/${workoutId}/start`, {
       difficulty,
-      plannedDuration,
-      userId
+      plannedDuration
     }).pipe(
       catchError(err => {
         this._error.set(err.message);
