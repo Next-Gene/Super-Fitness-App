@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.nav-link {
+  @apply text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium transition-colors relative;
+
+  &::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300;
+  }
+
+  &:hover::after,
+  &.router-link-active::after {
+    @apply w-full;
+  }
+}
+
+.glass {
+  @apply bg-white/90 dark:bg-dark-900/90 backdrop-blur-lg;
+}

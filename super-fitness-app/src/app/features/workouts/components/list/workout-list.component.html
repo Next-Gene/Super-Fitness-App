@@ -1,0 +1,118 @@
+<div class="page-container">
+  <div class="page-background">
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+  </div>
+
+  <div class="page-content">
+    <!-- Header -->
+    <div class="page-header">
+      <div class="header-text">
+        <h1>Workouts</h1>
+        <p>Find your perfect training session</p>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters-bar">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <input type="text" placeholder="Search workouts..." [(ngModel)]="searchQuery" (input)="onSearch()">
+      </div>
+
+      <div class="filter-group">
+        <select [(ngModel)]="selectedCategory" (change)="loadWorkouts()">
+          <option *ngFor="let cat of categories" [value]="cat.value">{{ cat.label }}</option>
+        </select>
+
+        <select [(ngModel)]="selectedDifficulty" (change)="loadWorkouts()">
+          <option *ngFor="let diff of difficulties" [value]="diff.value">{{ diff.label }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Workouts Grid -->
+    <div class="workouts-grid">
+      <a *ngFor="let workout of displayWorkouts; let i = index" 
+           class="workout-card block" 
+           [routerLink]="['/workouts', workout.id]"
+           [style.animation-delay]="i * 50 + 'ms'">
+        
+        <div class="workout-image" [class]="workout.category">
+          <div class="category-badge">{{ workout.category }}</div>
+          <div class="play-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="workout-body">
+          <div class="workout-meta">
+            <span class="difficulty" [class]="workout.difficulty">{{ workout.difficulty }}</span>
+            <span class="duration">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+              {{ workout.duration }} min
+            </span>
+          </div>
+
+          <h3>{{ workout.name }}</h3>
+          <p>{{ workout.description }}</p>
+
+          <div class="workout-stats">
+            <div class="stat">
+              <span class="value">{{ workout.caloriesBurned }}</span>
+              <span class="label">Calories</span>
+            </div>
+            <div class="stat">
+              <span class="value">{{ workout.exercises?.length || 0 }}</span>
+              <span class="label">Exercises</span>
+            </div>
+          </div>
+
+          <button class="start-btn">View Details</button>
+        </div>
+      </a>
+
+      <!-- Empty State -->
+      <div *ngIf="displayWorkouts.length === 0 && !isLoading()" class="empty-state">
+        <div class="empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6.5 6.5h11v11h-11z"/>
+            <path d="M6.5 6.5L17.5 17.5"/>
+            <path d="M6.5 17.5L17.5 6.5"/>
+          </svg>
+        </div>
+        <h3>No workouts found</h3>
+        <p>Try adjusting your filters</p>
+      </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-controls" *ngIf="pagination().totalPages > 1">
+      <button class="page-btn" (click)="prevPage()" [disabled]="!pagination().hasPrevious">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+        Previous
+      </button>
+      
+      <span class="page-info">
+        Page {{ pagination().page }} of {{ pagination().totalPages }}
+      </span>
+
+      <button class="page-btn" (click)="nextPage()" [disabled]="!pagination().hasNext">
+        Next
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

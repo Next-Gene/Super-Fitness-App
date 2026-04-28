@@ -1,0 +1,184 @@
+<div class="page-container">
+  <div class="page-background">
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+  </div>
+
+  <div class="page-content">
+    <!-- Header -->
+    <div class="page-header">
+      <div class="header-text">
+        <h1>Your Progress</h1>
+        <p>Track your fitness journey</p>
+      </div>
+      <button class="add-btn" (click)="openAddModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        Log Progress
+      </button>
+    </div>
+
+    <!-- Stats Overview -->
+    <div class="stats-grid">
+      <div class="stat-card weight">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ getLatestWeight() }}</span>
+          <span class="stat-label">Current Weight (kg)</span>
+        </div>
+      </div>
+
+      <div class="stat-card bodyfat">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ getLatestBodyFat() }}%</span>
+          <span class="stat-label">Body Fat</span>
+        </div>
+      </div>
+
+      <div class="stat-card goal">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ progressRecords().length }}</span>
+          <span class="stat-label">Total Logs</span>
+        </div>
+      </div>
+
+      <div class="stat-card change">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            <polyline points="17 6 23 6 23 12"/>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value" [class]="getWeightChange() >= 0 ? 'positive' : 'negative'">
+            {{ getWeightChange() >= 0 ? '+' : '' }}{{ getWeightChange() }} kg
+          </span>
+          <span class="stat-label">Weight Change</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Chart Placeholder -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h2>Weight Progress</h2>
+        <span class="chart-period">Last 30 days</span>
+      </div>
+      <div class="chart-placeholder">
+        <div class="chart-line">
+          <svg viewBox="0 0 400 100" preserveAspectRatio="none">
+            <polyline 
+              points="0,80 50,75 100,70 150,65 200,60 250,55 300,50 350,45 400,40"
+              fill="none"
+              stroke="url(#gradient)"
+              stroke-width="3"
+            />
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#e94560"/>
+                <stop offset="100%" style="stop-color:#ff6b6b"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="chart-labels">
+          <span>Week 1</span>
+          <span>Week 2</span>
+          <span>Week 3</span>
+          <span>Week 4</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- History -->
+    <div class="history-card">
+      <div class="history-header">
+        <h2>Progress History</h2>
+      </div>
+
+      <div class="history-list">
+        <div *ngFor="let record of progressRecords()" class="history-item">
+          <div class="history-date">
+            <span class="day">{{ getDay(record.date) }}</span>
+            <span class="month">{{ getMonth(record.date) }}</span>
+          </div>
+          <div class="history-data">
+            <div class="data-row">
+              <span class="label">Weight</span>
+              <span class="value">{{ record.weight }} kg</span>
+            </div>
+            <div *ngIf="record.bodyFat" class="data-row">
+              <span class="label">Body Fat</span>
+              <span class="value">{{ record.bodyFat }}%</span>
+            </div>
+            <div *ngIf="record.notes" class="data-row notes">
+              <span class="label">Notes</span>
+              <span class="value">{{ record.notes }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="progressRecords().length === 0" class="empty-state">
+          <div class="empty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <h3>No progress yet</h3>
+          <p>Start logging your progress to see your results</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div *ngIf="showAddModal()" class="modal-overlay" (click)="closeAddModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Log Progress</h2>
+        <button class="close-btn" (click)="closeAddModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Weight (kg)</label>
+          <input type="number" [(ngModel)]="newProgress().weight" placeholder="Enter weight">
+        </div>
+        <div class="form-group">
+          <label>Body Fat (%)</label>
+          <input type="number" [(ngModel)]="newProgress().bodyFat" placeholder="Enter body fat %">
+        </div>
+        <div class="form-group">
+          <label>Notes</label>
+          <textarea [(ngModel)]="newProgress().notes" placeholder="Any notes..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cancel-btn" (click)="closeAddModal()">Cancel</button>
+        <button class="save-btn" (click)="saveProgress()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

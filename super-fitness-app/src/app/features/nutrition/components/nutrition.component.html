@@ -1,0 +1,143 @@
+<div class="page-container">
+  <div class="page-background">
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+  </div>
+
+  <div class="page-content">
+    <!-- Header -->
+    <div class="page-header">
+      <div class="header-text">
+        <h1>Nutrition</h1>
+        <p>Fuel your body right</p>
+      </div>
+    </div>
+
+    <!-- Daily Summary -->
+    <div class="daily-summary">
+      <div class="summary-card calories">
+        <div class="summary-ring">
+          <svg viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="caloriesGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#e94560"/>
+                <stop offset="100%" style="stop-color:#ff6b6b"/>
+              </linearGradient>
+            </defs>
+            <circle cx="50" cy="50" r="45" class="ring-bg"/>
+            <circle cx="50" cy="50" r="45" class="ring-progress" 
+                    [attr.stroke-dasharray]="getCaloriesDashArray()"/>
+          </svg>
+          <div class="ring-center">
+            <span class="current">{{ dailyNutrition()?.calories || 0 }}</span>
+            <span class="goal">/ {{ dailyNutrition()?.calorieGoal || 2000 }}</span>
+          </div>
+        </div>
+        <div class="summary-info">
+          <h3>Calories</h3>
+          <p>{{ getCaloriesRemaining() }} remaining</p>
+        </div>
+      </div>
+
+      <div class="macros-grid">
+        <div class="macro-card protein">
+          <div class="macro-header">
+            <span class="macro-name">Protein</span>
+            <span class="macro-value">{{ dailyNutrition()?.protein || 0 }}g</span>
+          </div>
+          <div class="macro-bar">
+            <div class="macro-fill" [style.width.%]="getMacroPercent('protein')"></div>
+          </div>
+          <span class="macro-goal">Goal: {{ dailyNutrition()?.proteinGoal || 150 }}g</span>
+        </div>
+
+        <div class="macro-card carbs">
+          <div class="macro-header">
+            <span class="macro-name">Carbs</span>
+            <span class="macro-value">{{ dailyNutrition()?.carbs || 0 }}g</span>
+          </div>
+          <div class="macro-bar">
+            <div class="macro-fill" [style.width.%]="getMacroPercent('carbs')"></div>
+          </div>
+          <span class="macro-goal">Goal: {{ dailyNutrition()?.carbsGoal || 250 }}g</span>
+        </div>
+
+        <div class="macro-card fat">
+          <div class="macro-header">
+            <span class="macro-name">Fat</span>
+            <span class="macro-value">{{ dailyNutrition()?.fat || 0 }}g</span>
+          </div>
+          <div class="macro-bar">
+            <div class="macro-fill" [style.width.%]="getMacroPercent('fat')"></div>
+          </div>
+          <span class="macro-goal">Goal: {{ dailyNutrition()?.fatGoal || 65 }}g</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Meals Section -->
+    <div class="meals-section">
+      <div class="section-header">
+        <h2>Today's Meals</h2>
+        <div class="meal-tabs">
+          <button [class.active]="selectedMealType() === 'all'" (click)="selectedMealType.set('all')">All</button>
+          <button [class.active]="selectedMealType() === 'Breakfast'" (click)="selectedMealType.set('Breakfast')">Breakfast</button>
+          <button [class.active]="selectedMealType() === 'Lunch'" (click)="selectedMealType.set('Lunch')">Lunch</button>
+          <button [class.active]="selectedMealType() === 'Dinner'" (click)="selectedMealType.set('Dinner')">Dinner</button>
+          <button [class.active]="selectedMealType() === 'Snack'" (click)="selectedMealType.set('Snack')">Snack</button>
+        </div>
+      </div>
+
+      <div class="meals-grid">
+        <div *ngFor="let meal of getFilteredMeals(); let i = index" 
+             class="meal-card"
+             [style.animation-delay]="i * 50 + 'ms'">
+          <div class="meal-image" [class]="meal.mealType.toLowerCase()">
+            <span class="meal-type">{{ meal.mealType }}</span>
+          </div>
+          <div class="meal-body">
+            <h3>{{ meal.name }}</h3>
+            <div class="meal-nutrition">
+              <span>{{ meal.nutritionFacts?.calories || meal.calories }} cal</span>
+              <span>P: {{ meal.nutritionFacts?.protein || meal.protein }}g</span>
+              <span>C: {{ meal.nutritionFacts?.carbs || meal.carbs }}g</span>
+              <span>F: {{ meal.nutritionFacts?.fat || meal.fat }}g</span>
+            </div>
+            <button class="add-btn">+ Add to Today</button>
+          </div>
+        </div>
+
+        <div *ngIf="getFilteredMeals().length === 0" class="empty-state">
+          <div class="empty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M18 8h1a4 4 0 010 8h-1"/>
+              <path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/>
+              <line x1="6" y1="1" x2="6" y2="4"/>
+              <line x1="10" y1="1" x2="10" y2="4"/>
+              <line x1="14" y1="1" x2="14" y2="4"/>
+            </svg>
+          </div>
+          <h3>No meals found</h3>
+          <p>Try selecting a different meal type</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Add -->
+    <div class="quick-add-card">
+      <div class="quick-add-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
+      </div>
+      <div class="quick-add-text">
+        <h3>Quick Add</h3>
+        <p>Log a meal or water quickly</p>
+      </div>
+      <div class="quick-add-buttons">
+        <button class="quick-btn">Food</button>
+        <button class="quick-btn">Water</button>
+      </div>
+    </div>
+  </div>
+</div>

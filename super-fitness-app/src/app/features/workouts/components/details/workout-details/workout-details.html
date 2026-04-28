@@ -1,0 +1,79 @@
+<div class="page-container">
+  <div class="page-background">
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+  </div>
+
+  <div class="page-content" *ngIf="loading()">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading workout details...</p>
+    </div>
+  </div>
+
+  <div class="page-content" *ngIf="!loading() && workout()">
+    <!-- Header -->
+    <div class="back-nav">
+      <button class="back-btn" (click)="goBack()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+        Back to Workouts
+      </button>
+    </div>
+
+    <div class="workout-header-card">
+      <div class="workout-badge" [class]="workout()?.category">
+        {{ workout()?.category }}
+      </div>
+      
+      <h1>{{ workout()?.name }}</h1>
+      <p class="description">{{ workout()?.description }}</p>
+
+      <div class="workout-meta">
+        <div class="meta-item">
+          <span class="label">Difficulty</span>
+          <span class="value difficulty" [class]="workout()?.difficulty">{{ workout()?.difficulty }}</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">Duration</span>
+          <span class="value">{{ workout()?.duration }} mins</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">Burn</span>
+          <span class="value">{{ workout()?.caloriesBurned }} kcal</span>
+        </div>
+      </div>
+
+      <div class="action-bar">
+        <button class="btn-start">Start Workout</button>
+      </div>
+    </div>
+
+    <!-- Exercises List -->
+    <div class="exercises-section" *ngIf="workout()?.exercises?.length">
+      <h2>Exercises</h2>
+      
+      <div class="exercises-list">
+        <div *ngFor="let ex of workout()?.exercises; let i = index" class="exercise-card">
+          <div class="ex-number">{{ i + 1 }}</div>
+          <div class="ex-details">
+            <h3>{{ ex.name }}</h3>
+            <div class="ex-stats">
+              <span class="stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg> {{ ex.sets }} Sets</span>
+              <span class="stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11M15 3h6v6M10 14L21 3"/></svg> {{ ex.reps }} Reps</span>
+              <span class="stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> {{ ex.restTime }}s Rest</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content" *ngIf="!loading() && !workout()">
+    <div class="empty-state">
+      <p>Workout not found.</p>
+      <button class="back-btn" (click)="goBack()">Go Back</button>
+    </div>
+  </div>
+</div>
