@@ -25,12 +25,12 @@ export class HeaderComponent implements OnDestroy {
   readonly isAuth = this.authService.isAuthenticated;
   readonly userData = this.authService.currentUser;
 
-  readonly profileImageUrl = computed(() => {
+readonly profileImageUrl = computed(() => {
     const user = this.userData();
     if (!user) return null;
-    let url = user.profilePictureUrl || (user as any).profileImageUrl || null;
-    if (url && typeof url === 'string') {
-      url = url.replace('authenticationservice:8080', 'localhost:8088');
+    let url = user.profilePictureUrl || (user as any)?.profileImageUrl || null;
+    if (url && typeof url === 'string' && !url.startsWith('http') && !url.includes('localhost')) {
+      url = 'http://localhost:8088/' + url.replace(/^\/+/, '');
     }
     return url;
   });

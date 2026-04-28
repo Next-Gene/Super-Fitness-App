@@ -96,7 +96,9 @@ export class ProfileComponent implements OnInit {
     const user = this.user();
     let url = user?.profilePictureUrl || (user as any)?.profileImageUrl;
     if (url) {
-      url = url.replace('authenticationservice:8080', 'localhost:8088');
+      if (!url.startsWith('http')) {
+        url = 'http://localhost:8088/' + url.replace(/^\/+/, '');
+      }
       return `url(${url})`;
     }
     return '';
