@@ -1,0 +1,151 @@
+.footer {
+  background: rgba(10, 10, 20, 0.98);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footer-brand {
+  grid-column: span 1;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.brand-image {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: #FF4642;
+  padding: 4px;
+}
+
+.brand-name {
+  font-size: 1.125rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #e94560, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-tagline {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.brand-social {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 0.625rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #9ca3af;
+  transition: all 0.2s ease;
+}
+
+.social-link:hover {
+  background: linear-gradient(135deg, #e94560, #ff6b6b);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.social-link svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.footer-links, .footer-contact {
+  order: 2;
+}
+
+.links-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.links-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.link-item {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.link-item:hover {
+  color: #e94560;
+}
+
+.contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+.contact-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #e94560;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.25rem 1rem;
+  text-align: center;
+}
+
+.footer-bottom p {
+  color: #6b7280;
+  font-size: 0.8125rem;
+}

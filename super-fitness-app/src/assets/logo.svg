@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="100%" height="100%">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e94560" />
+      <stop offset="100%" stop-color="#ff6b6b" />
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Icon part - lightning/fitness bolt -->
+  <g transform="translate(15, 15)">
+    <path d="M50 5 L25 55 L42 55 L35 95 L80 35 L58 35 Z" fill="url(#logoGrad)" filter="url(#glow)"/>
+  </g>
+
+  <!-- Text part -->
+  <text x="115" y="72" font-family="'Inter', 'Roboto', sans-serif" font-weight="800" font-size="48" fill="#ffffff" letter-spacing="-1">
+    Super<tspan fill="url(#logoGrad)">Fitness</tspan>
+  </text>
+  
+  <!-- Tagline -->
+  <text x="116" y="100" font-family="'Inter', 'Roboto', sans-serif" font-weight="400" font-size="14" fill="#6b7280" letter-spacing="0.5">
+    Your fitness journey starts here
+  </text>
+</svg>

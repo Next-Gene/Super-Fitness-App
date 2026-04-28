@@ -229,16 +229,29 @@ export class NutritionService implements OnDestroy {
       tap(response => {
         const nutrition = this.getDefaultDailyNutrition();
         
-        if (response && response.weightHistory && response.weightHistory.length > 0) {
-          const lastWeight = response.weightHistory[response.weightHistory.length - 1].weight;
+        if (response?.data?.weightHistory && response.data.weightHistory.length > 0) {
+          const lastWeight = response.data.weightHistory[response.data.weightHistory.length - 1].weight;
           nutrition.weight = lastWeight;
         }
         
-        if (response && response.totalCaloriesBurned) {
-          nutrition.calories = response.totalCaloriesBurned;
+        if (response?.data?.statistics?.totalCaloriesBurned) {
+          nutrition.calories = response.data.statistics.totalCaloriesBurned;
         }
         
         this._dailyNutrition.set(nutrition);
+      }),
+      map(response => {
+        const nutrition = this.getDefaultDailyNutrition();
+        
+        if (response?.data?.weightHistory && response.data.weightHistory.length > 0) {
+          const lastWeight = response.data.weightHistory[response.data.weightHistory.length - 1].weight;
+          nutrition.weight = lastWeight;
+        }
+        
+        if (response?.data?.statistics?.totalCaloriesBurned) {
+          nutrition.calories = response.data.statistics.totalCaloriesBurned;
+        }
+        return nutrition;
       }),
       catchError(err => {
         this._error.set(err.message);

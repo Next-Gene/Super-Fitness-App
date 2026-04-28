@@ -1,23 +1,22 @@
-import { Component, inject, signal, OnDestroy, effect, computed } from '@angular/core';
+import { Component, inject, signal, OnDestroy, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
-import { TranslationService } from '../../../core/services/translation.service';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ThemeService } from '../../../core/services/theme.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { User } from '../../../core/models';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnDestroy {
   private readonly router = inject(Router);
-  readonly translation = inject(TranslationService);
   readonly themeService = inject(ThemeService);
   readonly authService = inject(AuthService);
+
+  private currentLang = signal('en');
 
   readonly isMenuOpen = signal(false);
   readonly isUserMenuOpen = signal(false);
@@ -25,7 +24,7 @@ export class HeaderComponent implements OnDestroy {
   readonly isAuth = this.authService.isAuthenticated;
   readonly userData = this.authService.currentUser;
 
-readonly profileImageUrl = computed(() => {
+  readonly profileImageUrl = computed(() => {
     const user = this.userData();
     if (!user) return null;
     let url = user.profilePictureUrl || (user as any)?.profileImageUrl || null;
@@ -50,16 +49,17 @@ readonly profileImageUrl = computed(() => {
   }
 
   toggleLanguage(): void {
-    this.translation.toggleLanguage();
+    this.currentLang.update(v => v === 'en' ? 'ar' : 'en');
   }
 
   logout(): void {
     this.authService.logout();
     this.isUserMenuOpen.set(false);
+    this.router.navigate(['/auth/login']);
   }
 
   getCurrentLang(): string {
-    return this.translation.getCurrentLang();
+    return this.currentLang();
   }
 
   closeMenus(): void {

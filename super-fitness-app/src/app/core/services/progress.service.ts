@@ -67,11 +67,11 @@ export class ProgressService implements OnDestroy {
 
     return this.api.get<any>(`/progress?userId=${userId}&period=weekly`).pipe(
       tap(response => {
-        if (response) {
+        if (response?.data) {
           const records: ProgressRecord[] = [];
           
-          if (response.weightHistory && Array.isArray(response.weightHistory)) {
-            response.weightHistory.forEach((item: any) => {
+          if (response.data.weightHistory && Array.isArray(response.data.weightHistory)) {
+            response.data.weightHistory.forEach((item: any) => {
               records.push({
                 id: item.date || Math.random().toString(),
                 date: item.date,
@@ -88,8 +88,8 @@ export class ProgressService implements OnDestroy {
         }
       }),
       map(response => {
-        if (response && response.weightHistory) {
-          return response.weightHistory.map((item: any, index: number) => ({
+        if (response?.data?.weightHistory) {
+          return response.data.weightHistory.map((item: any, index: number) => ({
             id: item.date || index.toString(),
             date: item.date,
             weight: item.weight,
@@ -185,19 +185,19 @@ export class ProgressService implements OnDestroy {
 
     return this.api.get<any>(`/progress?userId=${userId}&period=weekly`).pipe(
       tap(response => {
-        if (response) {
+        if (response?.data) {
           this._stats.set({
-            totalWorkouts: response.statistics?.totalWorkouts || 0,
-            totalCalories: response.statistics?.totalCaloriesBurned || 0,
-            currentStreak: response.statistics?.currentStreak || 0,
-            longestStreak: response.statistics?.longestStreak || 0,
-            weeklyWorkouts: response.statistics?.totalWorkouts || 0,
-            monthlyWorkouts: response.statistics?.totalWorkouts || 0,
-            averageDuration: response.statistics?.totalWorkoutMinutes || 0
+            totalWorkouts: response.data.statistics?.totalWorkouts || 0,
+            totalCalories: response.data.statistics?.totalCaloriesBurned || 0,
+            currentStreak: response.data.statistics?.currentStreak || 0,
+            longestStreak: response.data.statistics?.longestStreak || 0,
+            weeklyWorkouts: response.data.statistics?.totalWorkouts || 0,
+            monthlyWorkouts: response.data.statistics?.totalWorkouts || 0,
+            averageDuration: response.data.statistics?.totalWorkoutMinutes || 0
           });
 
-          if (response.recentWorkouts) {
-            this._recentWorkouts.set(response.recentWorkouts.map((r: any) => ({
+          if (response.data.recentWorkouts) {
+            this._recentWorkouts.set(response.data.recentWorkouts.map((r: any) => ({
               id: r.id,
               name: 'Workout Session', // Placeholder since name isn't in Progress service
               duration: r.durationMinutes,
@@ -209,13 +209,13 @@ export class ProgressService implements OnDestroy {
         }
       }),
       map(response => ({
-        totalWorkouts: response?.workoutsCompleted || 0,
-        totalCalories: response?.totalCaloriesBurned || 0,
-        currentStreak: response?.currentStreak || 0,
-        longestStreak: response?.currentStreak || 0,
-        weeklyWorkouts: response?.workoutsCompleted || 0,
-        monthlyWorkouts: response?.workoutsCompleted || 0,
-        averageDuration: response?.totalWorkoutMinutes || 0
+        totalWorkouts: response?.data?.statistics?.totalWorkouts || 0,
+        totalCalories: response?.data?.statistics?.totalCaloriesBurned || 0,
+        currentStreak: response?.data?.statistics?.currentStreak || 0,
+        longestStreak: response?.data?.statistics?.longestStreak || 0,
+        weeklyWorkouts: response?.data?.statistics?.totalWorkouts || 0,
+        monthlyWorkouts: response?.data?.statistics?.totalWorkouts || 0,
+        averageDuration: 0
       })),
       catchError(err => {
         this._error.set(err.message);

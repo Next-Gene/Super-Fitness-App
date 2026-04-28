@@ -138,29 +138,103 @@
         <a routerLink="/workouts" class="see-all">See All</a>
       </div>
 
-      <div class="workout-list">
-        <div *ngFor="let workout of recentWorkouts(); let i = index" class="workout-item">
-          <div class="workout-icon" [class]="workout.category">
-            <svg *ngIf="workout.category === 'hiit'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 6v6l4 2"/>
-            </svg>
-            <svg *ngIf="workout.category === 'strength'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="3" width="18" height="18" rx="2"/>
-              <path d="M3 9h18M9 21V9"/>
-            </svg>
-            <svg *ngIf="workout.category === 'cardio'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-            </svg>
+      <div class="workout-grid" *ngIf="recentWorkouts().length > 0; else noWorkouts">
+        <div *ngFor="let workout of recentWorkouts(); let i = index" class="workout-card" [style.animation-delay.ms]="i * 100">
+          
+          <!-- Image Background -->
+          <div class="workout-image-wrapper">
+            <img *ngIf="workout.imageUrl" [src]="workout.imageUrl" alt="Workout" class="workout-image" />
+            <div *ngIf="!workout.imageUrl" class="workout-icon-fallback" [ngClass]="getWorkoutIconClass(workout)">
+              <svg class="icon-fallback" fill="none" viewBox="0 0 24 24" stroke="currentColor" [ngClass]="getWorkoutIconClass(workout)">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" [attr.d]="getWorkoutIconPath(workout)" />
+              </svg>
+            </div>
+            
+            <!-- Category Badge -->
+            <div class="category-badge" [ngClass]="getCategoryClass(workout)">
+              {{ workout.category || 'Fitness' }}
+            </div>
           </div>
-          <div class="workout-info">
-            <h3>{{ workout.name }}</h3>
-            <p>{{ workout.duration }} min - {{ workout.calories }} cal</p>
-          </div>
-          <div class="workout-category">
-            <span [class]="workout.category">{{ workout.category }}</span>
+          
+          <!-- Content -->
+          <div class="workout-card-content">
+            <h3 class="workout-card-title">{{ workout.name || 'Workout Session' }}</h3>
+            
+            <div class="workout-card-stats">
+              <div class="stat-item">
+                <svg class="stat-icon duration-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>{{ workout.duration }} min</span>
+              </div>
+              
+              <div class="stat-item">
+                <svg class="stat-icon calories-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
+                </svg>
+                <span>{{ workout.calories }} cal</span>
+              </div>
+
+              <div class="stat-item" *ngIf="workout.intensity">
+                <svg class="stat-icon intensity-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span>{{ workout.intensity }}</span>
+              </div>
+            </div>
+            
+            <!-- Date performed -->
+            <div *ngIf="workout.performedAt" class="workout-card-date">
+              <svg class="date-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              {{ workout.performedAt | date:'mediumDate' }} at {{ workout.performedAt | date:'shortTime' }}
+            </div>
+
+            <!-- Performance indicator -->
+            <div *ngIf="workout.performance" class="workout-performance">
+              <div class="performance-bar">
+                <div class="performance-fill" [style.width.%]="workout.performance"></div>
+              </div>
+              <span class="performance-label">{{ workout.performance }}% Completed</span>
+            </div>
           </div>
         </div>
+      </div>
+
+      <ng-template #noWorkouts>
+        <div class="no-workouts">
+          <svg class="no-workouts-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <p>No recent workouts yet. Start your first session!</p>
+          <a routerLink="/workouts" class="start-btn">Start Workout</a>
+        </div>
+      </ng-template>
+
+      <!-- Pagination -->
+      <div class="pagination" *ngIf="totalPages() > 1">
+        <button class="page-btn" [disabled]="currentPage() === 1" (click)="prevPage()">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        
+        <div class="page-numbers">
+          <button *ngFor="let page of getPagesArray()" 
+                  class="page-number" 
+                  [class.active]="currentPage() === page"
+                  (click)="goToPage(page)">
+            {{ page }}
+          </button>
+        </div>
+        
+        <button class="page-btn" [disabled]="currentPage() === totalPages()" (click)="nextPage()">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
     </div>
 

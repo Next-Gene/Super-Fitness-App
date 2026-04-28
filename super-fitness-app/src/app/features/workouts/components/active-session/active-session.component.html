@@ -1,64 +1,155 @@
-<div class="active-session-container">
-  <!-- Loading State -->
-  <div *ngIf="loading()" class="loading-state">
-    <div class="spinner"></div>
-    <p>Loading your session...</p>
-  </div>
+<div class="session-container">
+  <!-- Ambient Glow Effects -->
+  <div class="glow-effect glow-top"></div>
+  <div class="glow-effect glow-bottom"></div>
 
-  <!-- Error State -->
-  <div *ngIf="error()" class="error-state">
-    <i class="icon-warning"></i>
-    <p>{{ error() }}</p>
-    <button class="btn btn-outline" routerLink="/workouts">Go Back</button>
-  </div>
-
-  <!-- Session Content -->
-  <div *ngIf="!loading() && session()" class="session-content">
-    <div class="header-card glass-panel">
-      <div class="workout-info">
-        <span class="badge" [class]="session().difficulty.toLowerCase()">
-          {{ session().difficulty }}
-        </span>
-        <h1>{{ session().workoutName }}</h1>
+  <div class="session-content">
+    
+    <!-- Loading State -->
+    <div *ngIf="loading()" class="state-container">
+      <div class="loader">
+        <div class="loader-ring"></div>
       </div>
-      
-      <div class="timer-container">
-        <div class="timer-display">{{ formattedTime() }}</div>
-        <p class="timer-label">Elapsed Time</p>
-      </div>
+      <p class="loading-text">Preparing your session...</p>
     </div>
 
-    <div class="exercises-container">
-      <h2>Exercises</h2>
+    <!-- Error State -->
+    <div *ngIf="error()" class="state-container">
+      <div class="error-icon-container">
+        <svg class="error-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+        </svg>
+      </div>
+      <h2 class="error-title">Session Error</h2>
+      <p class="error-message">{{ error() }}</p>
+      <button class="btn-error" routerLink="/workouts">
+        Return to Workouts
+      </button>
+    </div>
+
+    <!-- Main Session Content -->
+    <div *ngIf="!loading() && session()" class="session-main">
       
-      <div class="exercise-card glass-panel" 
-           *ngFor="let exercise of session().exercises; let i = index"
-           [class.completed]="exercise.completed">
+      <!-- Top Header & Timer -->
+      <div class="session-header">
         
-        <div class="exercise-header">
-          <div class="exercise-number">{{ i + 1 }}</div>
-          <div class="exercise-title">
-            <h3>{{ exercise.name }}</h3>
-            <p class="exercise-meta">
-              {{ exercise.sets }} Sets × {{ exercise.reps }} | Rest: {{ exercise.restTime }}s
-            </p>
+        <!-- Workout Info -->
+        <div class="workout-info-panel">
+          <div class="panel-accent"></div>
+          <div class="panel-content">
+            <div class="workout-meta">
+              <span class="difficulty-badge" [ngClass]="getDifficultyClass()">
+                {{ session().difficulty }}
+              </span>
+              <span class="session-label">Active Session</span>
+            </div>
+            <h1 class="workout-title">
+              {{ session().workoutName }}
+            </h1>
+            <div class="workout-stats">
+              <div class="stat-item">
+                <svg class="stat-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span>{{ getCompletedCount() }} / {{ session().exercises.length }} Completed</span>
+              </div>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" [style.width.%]="getProgressPercentage()"></div>
+            </div>
           </div>
-          
-          <button class="btn-check" 
-                  (click)="toggleExerciseComplete(exercise)"
-                  [class.active]="exercise.completed">
-            <svg *ngIf="exercise.completed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
+        </div>
+
+        <!-- Timer Panel -->
+        <div class="timer-panel">
+          <div class="timer-ring-container">
+            <svg class="timer-svg" viewBox="0 0 100 100">
+              <circle class="timer-bg" cx="50" cy="50" r="46"></circle>
+              <circle class="timer-progress" cx="50" cy="50" r="46" [attr.stroke-dasharray]="289" [attr.stroke-dashoffset]="289 - (289 * (elapsedSeconds() % 60) / 60)"></circle>
+              <defs>
+                <linearGradient id="timerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#3b82f6" />
+                  <stop offset="100%" stop-color="#10b981" />
+                </linearGradient>
+              </defs>
             </svg>
-            <span *ngIf="!exercise.completed"></span>
+            <div class="timer-display">
+              <div class="timer-time">{{ formattedTime() }}</div>
+              <div class="timer-label">Elapsed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercises List -->
+      <div class="exercises-section">
+        <h2 class="section-title">
+          <svg class="title-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+          </svg>
+          Workout Plan
+        </h2>
+        
+        <div *ngFor="let exercise of session().exercises; let i = index" 
+             class="exercise-card"
+             [ngClass]="{'exercise-completed': exercise.completed}">
+          
+          <!-- Number indicator -->
+          <div class="exercise-number" [ngClass]="exercise.completed ? 'completed' : 'pending'">
+            <svg *ngIf="exercise.completed" class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+            </svg>
+            <span *ngIf="!exercise.completed">{{ i + 1 }}</span>
+          </div>
+
+          <!-- Info -->
+          <div class="exercise-info">
+            <h3 class="exercise-name" [ngClass]="{'completed-text': exercise.completed}">
+              {{ exercise.name }}
+            </h3>
+            <div class="exercise-details">
+              <span class="detail-item">
+                <svg class="detail-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                {{ exercise.sets }} Sets × {{ exercise.reps }}
+              </span>
+              <span class="detail-item">
+                <svg class="detail-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                {{ exercise.restTime }}s Rest
+              </span>
+            </div>
+          </div>
+
+          <!-- Checkbox Toggle -->
+          <button (click)="toggleExerciseComplete(exercise)"
+                  class="exercise-checkbox"
+                  [ngClass]="exercise.completed ? 'checked' : 'unchecked'">
+            <svg *ngIf="exercise.completed" class="checkbox-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+            </svg>
           </button>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="action-bar glass-panel">
-      <button class="btn btn-danger" routerLink="/workouts">Abort</button>
-      <button class="btn btn-primary" (click)="finishWorkout()">Finish Workout</button>
+  <!-- Sticky Bottom Action Bar -->
+  <div *ngIf="!loading() && session()" class="action-bar">
+    <div class="action-bar-content">
+      <button class="btn-abort" routerLink="/workouts">
+        <svg class="btn-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        Abort
+      </button>
+      
+      <button class="btn-complete" (click)="finishWorkout()">
+        <svg class="btn-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+        </svg>
+        Complete Session
+      </button>
     </div>
   </div>
 </div>

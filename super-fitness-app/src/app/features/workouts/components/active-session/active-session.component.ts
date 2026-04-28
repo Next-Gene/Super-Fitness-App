@@ -78,6 +78,28 @@ export class ActiveSessionComponent implements OnInit, OnDestroy {
     this.formattedTime.set(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
   }
 
+  getCompletedCount(): number {
+    if (!this.session()?.exercises) return 0;
+    return this.session().exercises.filter((e: any) => e.completed).length;
+  }
+
+  getProgressPercentage(): number {
+    if (!this.session()?.exercises || this.session().exercises.length === 0) return 0;
+    const completed = this.getCompletedCount();
+    return (completed / this.session().exercises.length) * 100;
+  }
+
+  getDifficultyClass(): string {
+    const difficulty = this.session()?.difficulty?.toLowerCase();
+    switch (difficulty) {
+      case 'beginner': return 'beginner';
+      case 'easy': return 'easy';
+      case 'medium': return 'medium';
+      case 'hard': return 'hard';
+      default: return 'easy';
+    }
+  }
+
   toggleExerciseComplete(exercise: any) {
     exercise.completed = !exercise.completed;
   }
@@ -94,9 +116,11 @@ export class ActiveSessionComponent implements OnInit, OnDestroy {
 
     this.workoutService.completeWorkoutSession(this.sessionId(), durationMinutes, caloriesBurned).subscribe({
       next: () => {
-        this.loading.set(false);
-        // Navigate to a success/summary page or dashboard
-        this.router.navigate(['/dashboard']);
+        // Wait for RabbitMQ event to be processed by ProgressTrackingService
+        setTimeout(() => {
+          this.loading.set(false);
+          this.router.navigate(['/dashboard'], { queryParams: { refresh: new Date().getTime() } });
+        }, 1500);
       },
       error: (err: any) => {
         this.error.set(err.message || 'Failed to complete session');
