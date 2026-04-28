@@ -2,6 +2,7 @@ import { Injectable, inject, signal, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { tap, map, catchError } from 'rxjs/operators';
 import { ApiService } from './api.service';
+import { AuthService } from './auth.service';
 import { Workout, WorkoutPlan, WorkoutSession, WorkoutCategory, Difficulty } from '../models';
 
 export interface PaginatedResponse<T> {
@@ -157,10 +158,21 @@ export class WorkoutService implements OnDestroy {
     );
   }
 
+  private readonly auth = inject(AuthService);
+
   startWorkout(workoutId: string, difficulty: string = 'Medium', plannedDuration: number = 60): Observable<any> {
+    const user = this.auth.currentUser();
+    const userId = user?.id;
+
+    if (!userId) {
+      this._error.set('User must be logged in to start a workout.');
+      return of(null);
+    }
+
     return this.api.post<any>(`/workouts/${workoutId}/start`, {
       difficulty,
-      plannedDuration
+      plannedDuration,
+      userId
     }).pipe(
       catchError(err => {
         this._error.set(err.message);
