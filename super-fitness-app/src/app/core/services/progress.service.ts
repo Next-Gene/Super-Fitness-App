@@ -199,6 +199,7 @@ export class ProgressService implements OnDestroy {
           if (response.data.recentWorkouts) {
             this._recentWorkouts.set(response.data.recentWorkouts.map((r: any) => ({
               id: r.id,
+              workoutId: r.workoutId,
               name: 'Workout Session', // Placeholder since name isn't in Progress service
               duration: r.durationMinutes,
               calories: r.caloriesBurned,

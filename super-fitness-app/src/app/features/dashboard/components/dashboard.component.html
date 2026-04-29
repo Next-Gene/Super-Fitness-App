@@ -139,17 +139,28 @@
       </div>
 
       <div class="workout-grid" *ngIf="recentWorkouts().length > 0; else noWorkouts">
-        <div *ngFor="let workout of recentWorkouts(); let i = index" class="workout-card" [style.animation-delay.ms]="i * 100">
+        <div *ngFor="let workout of recentWorkouts(); let i = index" 
+             class="workout-card" 
+             style="cursor: pointer;"
+             [routerLink]="['/workouts', workout.workoutId || workout.id]"
+             [style.animation-delay.ms]="i * 100">
           
           <!-- Image Background -->
           <div class="workout-image-wrapper">
-            <img *ngIf="workout.imageUrl" [src]="workout.imageUrl" alt="Workout" class="workout-image" />
+            <img *ngIf="workout.imageUrl" [src]="workout.imageUrl" [alt]="workout.name || 'Workout'" class="workout-image" />
             <div *ngIf="!workout.imageUrl" class="workout-icon-fallback" [ngClass]="getWorkoutIconClass(workout)">
               <svg class="icon-fallback" fill="none" viewBox="0 0 24 24" stroke="currentColor" [ngClass]="getWorkoutIconClass(workout)">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" [attr.d]="getWorkoutIconPath(workout)" />
               </svg>
             </div>
             
+            <!-- Video Play Button Overlay -->
+            <button *ngIf="workout.videoUrl" class="video-play-btn" (click)="openVideo($event, workout.videoUrl)" title="Watch Video">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/>
+              </svg>
+            </button>
+
             <!-- Category Badge -->
             <div class="category-badge" [ngClass]="getCategoryClass(workout)">
               {{ workout.category || 'Fitness' }}
@@ -159,6 +170,11 @@
           <!-- Content -->
           <div class="workout-card-content">
             <h3 class="workout-card-title">{{ workout.name || 'Workout Session' }}</h3>
+
+            <!-- Description snippet -->
+            <p *ngIf="workout.description" class="workout-card-desc">
+              {{ workout.description | slice:0:80 }}{{ workout.description && workout.description.length > 80 ? '...' : '' }}
+            </p>
             
             <div class="workout-card-stats">
               <div class="stat-item">
@@ -191,6 +207,15 @@
               </svg>
               {{ workout.performedAt | date:'mediumDate' }} at {{ workout.performedAt | date:'shortTime' }}
             </div>
+
+            <!-- Video link -->
+            <button *ngIf="workout.videoUrl" class="video-link-btn" (click)="openVideo($event, workout.videoUrl)">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Watch Video
+            </button>
 
             <!-- Performance indicator -->
             <div *ngIf="workout.performance" class="workout-performance">

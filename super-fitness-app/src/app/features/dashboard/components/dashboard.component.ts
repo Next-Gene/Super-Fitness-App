@@ -1,18 +1,23 @@
 import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, ActivatedRoute } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { AuthService } from '../../../core/services/auth.service';
 import { ProgressService } from '../../../core/services/progress.service';
+import { WorkoutService } from '../../../core/services/workout.service';
 
 interface WorkoutData {
   id?: string;
+  workoutId?: number;
   name?: string;
+  description?: string;
   duration?: number;
   calories?: number;
   performedAt?: string;
   category?: string;
   imageUrl?: string;
+  videoUrl?: string;
   intensity?: string;
   performance?: number;
 }
@@ -27,6 +32,7 @@ interface WorkoutData {
 export class DashboardComponent implements OnInit, OnDestroy {
   private readonly authService = inject(AuthService);
   private readonly progressService = inject(ProgressService);
+  private readonly workoutService = inject(WorkoutService);
   private readonly route = inject(ActivatedRoute);
   private readonly destroy$ = new Subject<void>();
 
@@ -70,8 +76,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
           });
           
           const workouts = this.progressService.recentWorkouts();
-          if (Array.isArray(workouts)) {
-            this.allWorkouts = workouts;
+          if (Array.isArray(workouts) && workouts.length > 0) {
+            this.enrichWorkoutsWithDetails(workouts);
+          } else {
+            this.allWorkouts = [];
             this.calculatePagination();
           }
         }
@@ -121,6 +129,58 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getPagesArray(): number[] {
     const total = this.totalPages();
     return Array.from({ length: total }, (_, i) => i + 1);
+  }
+
+  private enrichWorkoutsWithDetails(workouts: any[]): void {
+    const uniqueWorkoutIds = [...new Set(workouts.map(w => w.workoutId).filter(id => id && id > 0))];
+
+    if (uniqueWorkoutIds.length === 0) {
+      this.allWorkouts = workouts;
+      this.calculatePagination();
+      return;
+    }
+
+    const detailRequests = uniqueWorkoutIds.map(id =>
+      this.workoutService.getWorkoutById(String(id)).pipe(
+        catchError(() => of(null))
+      )
+    );
+
+    forkJoin(detailRequests).pipe(takeUntil(this.destroy$)).subscribe({
+      next: (details) => {
+        const detailsMap = new Map<number, any>();
+        details.forEach((detail, idx) => {
+          if (detail) {
+            detailsMap.set(uniqueWorkoutIds[idx], detail);
+          }
+        });
+
+        this.allWorkouts = workouts.map(w => {
+          const detail = w.workoutId ? detailsMap.get(w.workoutId) : null;
+          return {
+            ...w,
+            name: detail?.name || w.name || 'Workout Session',
+            description: detail?.description || '',
+            category: detail?.category || w.category || 'fitness',
+            imageUrl: detail?.imageUrl || w.imageUrl,
+            videoUrl: detail?.videoUrl,
+            intensity: detail?.difficulty || w.intensity
+          };
+        });
+        this.calculatePagination();
+      },
+      error: () => {
+        this.allWorkouts = workouts;
+        this.calculatePagination();
+      }
+    });
+  }
+
+  openVideo(event: Event, videoUrl: string): void {
+    event.stopPropagation();
+    if (videoUrl) {
+      window.open(videoUrl, '_blank');
+    }
   }
 
   getInitials(): string {
