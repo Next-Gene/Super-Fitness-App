@@ -68,6 +68,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
             currentStreak: data.currentStreak,
             weeklyWorkouts: data.weeklyWorkouts
           });
+          
+          const workouts = this.progressService.recentWorkouts();
+          if (Array.isArray(workouts)) {
+            this.allWorkouts = workouts;
+            this.calculatePagination();
+          }
         }
       },
       error: () => {
@@ -77,14 +83,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
           currentStreak: 0,
           weeklyWorkouts: 0
         });
+        this.allWorkouts = [];
+        this.calculatePagination();
       }
     });
-
-    const workouts = this.progressService.recentWorkouts();
-    if (Array.isArray(workouts)) {
-      this.allWorkouts = workouts;
-      this.calculatePagination();
-    }
   }
 
   calculatePagination(): void {
