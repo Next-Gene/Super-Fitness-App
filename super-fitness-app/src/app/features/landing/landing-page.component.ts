@@ -108,7 +108,7 @@ import { RouterOutlet, RouterLink } from '@angular/router';
 </div>
   `,
   styles: [`
-  :root {
+  .landing-container {
     --bg-color: #0b0f19;
     --text-primary: #ffffff;
     --text-secondary: #94a3b8;
@@ -116,12 +116,7 @@ import { RouterOutlet, RouterLink } from '@angular/router';
     --accent-hover: #ff5a7f;
     --glass-bg: rgba(30, 41, 59, 0.4);
     --glass-border: rgba(255, 255, 255, 0.08);
-  }
 
-  /* Reset & Base */
-  * { box-sizing: border-box; }
-  
-  .landing-container {
     min-height: 100vh;
     background-color: var(--bg-color);
     color: var(--text-primary);
