@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { WorkoutService } from '../../../../../core/services/workout.service';
 import { AuthService } from '../../../../../core/services/auth.service';
@@ -8,7 +8,7 @@ import { AuthService } from '../../../../../core/services/auth.service';
 @Component({
   selector: 'app-workout-details',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './workout-details.html',
   styleUrl: './workout-details.scss',
 })

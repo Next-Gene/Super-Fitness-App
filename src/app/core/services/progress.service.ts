@@ -65,7 +65,7 @@ export class ProgressService implements OnDestroy {
       return of([]);
     }
 
-    return this.api.get<any>(`/progress?userId=${userId}&period=weekly`).pipe(
+    return this.api.get<any>('/progress', { userId, period: 'weekly' }).pipe(
       tap(response => {
         if (response?.data) {
           const records: ProgressRecord[] = [];
@@ -183,7 +183,7 @@ export class ProgressService implements OnDestroy {
       });
     }
 
-    return this.api.get<any>(`/progress?userId=${userId}&period=weekly`).pipe(
+    return this.api.get<any>('/progress', { userId, period: 'weekly' }).pipe(
       tap(response => {
         if (response?.data) {
           this._stats.set({

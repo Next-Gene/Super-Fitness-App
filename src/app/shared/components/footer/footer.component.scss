@@ -1,6 +1,6 @@
 .footer {
-  background: rgba(10, 10, 20, 0.98);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--bg-main);
+  border-top: 1px solid var(--border-main);
   margin-top: auto;
 }
 
@@ -48,7 +48,7 @@
 .brand-name {
   font-size: 1.125rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #e94560, #ff6b6b);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -73,8 +73,9 @@
   width: 36px;
   height: 36px;
   border-radius: 0.625rem;
-  background: rgba(255, 255, 255, 0.05);
-  color: #9ca3af;
+  background: var(--bg-card);
+  color: var(--text-muted);
+  border: 1px solid var(--border-main);
   transition: all 0.2s ease;
 }
 
@@ -96,7 +97,7 @@
 .links-title {
   font-size: 0.875rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-main);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 1rem;
@@ -140,7 +141,7 @@
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--border-main);
   padding: 1.25rem 1rem;
   text-align: center;
 }

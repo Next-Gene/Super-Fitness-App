@@ -1,0 +1,14 @@
+<div class="logo-wrapper" [style.width]="size + 'px'" [style.height]="size + 'px'">
+  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-svg">
+    <circle cx="50" cy="50" r="48" fill="url(#logoGradient)" stroke="var(--bg-surface)" stroke-width="0.5" opacity="0.9"/>
+    <path d="M30 35C30 35 45 25 60 30C75 35 70 50 50 50C30 50 25 65 40 70C55 75 70 65 70 65" 
+          stroke="var(--text-inverse)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" class="logo-path"/>
+    <path d="M40 50H45L48 40L52 60L55 50H60" stroke="var(--text-inverse)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+    <defs>
+      <linearGradient id="logoGradient" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="var(--color-primary)" />
+        <stop offset="100%" stop-color="var(--color-secondary)" />
+      </linearGradient>
+    </defs>
+  </svg>
+</div>

@@ -1,0 +1,312 @@
+﻿[33m>[39m Building...
+[32mΓêÜ[39m Building...
+[1mInitial chunk files[22m                [2m | [22m[1mNames[22m                           [2m | [22m [1mRaw size[22m
+[32mchunk-RHGQY4I3.js[39m                  [2m | [22m[2m-[22m                               [2m | [22m  [36m2.27 MB[39m[2m | [22m
+[32mpolyfills.js[39m                       [2m | [22m[2mpolyfills[22m                       [2m | [22m  [36m1.04 MB[39m[2m | [22m
+[32mchunk-ZBGJ5G7L.js[39m                  [2m | [22m[2m-[22m                               [2m | [22m[36m265.90 kB[39m[2m | [22m
+[32mspec-login.component.spec.js[39m       [2m | [22m[2mspec-login.component.spec[22m       [2m | [22m[36m260.53 kB[39m[2m | [22m
+[32mchunk-NLCH3EBL.js[39m                  [2m | [22m[2m-[22m                               [2m | [22m[36m240.21 kB[39m[2m | [22m
+[32mchunk-4U4TOXX2.js[39m                  [2m | [22m[2m-[22m                               [2m | [22m [36m96.56 kB[39m[2m | [22m
+[32mjasmine-cleanup-1.js[39m               [2m | [22m[2mjasmine-cleanup-1[22m               [2m | [22m [36m67.20 kB[39m[2m | [22m
+[32mspec-dashboard.component.spec.js[39m   [2m | [22m[2mspec-dashboard.component.spec[22m   [2m | [22m [36m38.98 kB[39m[2m | [22m
+[32mstyles.css[39m                         [2m | [22m[2mstyles[22m                          [2m | [22m [36m27.67 kB[39m[2m | [22m
+[32mspec-layout.component.spec.js[39m      [2m | [22m[2mspec-layout.component.spec[22m      [2m | [22m [36m25.72 kB[39m[2m | [22m
+[32mchunk-MNMK5CJV.js[39m                  [2m | [22m[2m-[22m                               [2m | [22m [36m20.46 kB[39m[2m | [22m
+[32mchunk-HWKCMMZU.js[39m                  [2m | [22m[2m-[22m                               [2m | [22m [36m20.02 kB[39m[2m | [22m
+[32mchunk-5F7QIF3J.js[39m                  [2m | [22m[2m-[22m                               [2m | [22m [36m12.27 kB[39m[2m | [22m
+[32mspec-nutrition.service.spec.js[39m     [2m | [22m[2mspec-nutrition.service.spec[22m     [2m | [22m [36m10.39 kB[39m[2m | [22m
+[32mchunk-IX7X6HPV.js[39m                  [2m | [22m[2m-[22m                               [2m | [22m  [36m7.90 kB[39m[2m | [22m
+[32mchunk-MZIP7SHY.js[39m                  [2m | [22m[2m-[22m                               [2m | [22m  [36m7.59 kB[39m[2m | [22m
+[32mspec-auth.service.spec.js[39m          [2m | [22m[2mspec-auth.service.spec[22m          [2m | [22m  [36m5.48 kB[39m[2m | [22m
+[32mtest_main.js[39m                       [2m | [22m[2mtest_main[22m                       [2m | [22m  [36m4.35 kB[39m[2m | [22m
+[32mchunk-ZMHQ6AD5.js[39m                  [2m | [22m[2m-[22m                               [2m | [22m  [36m4.25 kB[39m[2m | [22m
+[32mchunk-7AXOYX5V.js[39m                  [2m | [22m[2m-[22m                               [2m | [22m  [36m3.96 kB[39m[2m | [22m
+[32mspec-auth.interceptor.spec.js[39m      [2m | [22m[2mspec-auth.interceptor.spec[22m      [2m | [22m  [36m3.79 kB[39m[2m | [22m
+[32mspec-workout.service.spec.js[39m       [2m | [22m[2mspec-workout.service.spec[22m       [2m | [22m  [36m3.51 kB[39m[2m | [22m
+[32mspec-header.component.spec.js[39m      [2m | [22m[2mspec-header.component.spec[22m      [2m | [22m  [36m3.50 kB[39m[2m | [22m
+[32mspec-progress.service.spec.js[39m      [2m | [22m[2mspec-progress.service.spec[22m      [2m | [22m  [36m2.74 kB[39m[2m | [22m
+[32mspec-auth.guard.spec.js[39m            [2m | [22m[2mspec-auth.guard.spec[22m            [2m | [22m  [36m2.68 kB[39m[2m | [22m
+[32mspec-api.service.spec.js[39m           [2m | [22m[2mspec-api.service.spec[22m           [2m | [22m  [36m2.58 kB[39m[2m | [22m
+[32mchunk-BN7T6QRN.js[39m                  [2m | [22m[2m-[22m                               [2m | [22m  [36m2.43 kB[39m[2m | [22m
+[32mchunk-TTULUY32.js[39m                  [2m | [22m[2m-[22m                               [2m | [22m  [36m1.99 kB[39m[2m | [22m
+[32mspec-theme.service.spec.js[39m         [2m | [22m[2mspec-theme.service.spec[22m         [2m | [22m  [36m1.97 kB[39m[2m | [22m
+[32mjasmine-cleanup-0.js[39m               [2m | [22m[2mjasmine-cleanup-0[22m               [2m | [22m[36m519 bytes[39m[2m | [22m
+[32mspec-landing-page.component.spec.js[39m[2m | [22m[2mspec-landing-page.component.spec[22m[2m | [22m [36m61 bytes[39m[2m | [22m
+
+[1m [22m                                  [2m | [22m[1mInitial total[22m                   [2m | [22m  [1m4.45 MB[22m
+
+Application bundle generation complete. [7.091 seconds] - 2026-04-30T17:27:29.297Z
+
+npx : [1m[33m[33mΓû▓ [43;33m[[43;30mWARNING[43;33m][0m [1mDeprecation[0m [1m[35m[plugin angular-sass][0m
+At line:1 char:1
++ npx ng test --watch=false --browsers=ChromeHeadless --no-progress > t ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([1m[33m[33mΓ...gular-sass][0m:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+    src/styles.scss:1:8:
+[37m      1 Γöé @import [32m[37m"tailwindcss";
+        Γò╡         [32m^[0m
+
+
+  Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+  
+  More info and automated migrator: [4mhttps://sass-lang.com/d/import[0m
+
+  The plugin "angular-sass" was triggered by this import
+
+    angular:styles/global:styles:1:8:
+[37m      1 Γöé @import [32m'src/styles.scss'[37m;
+        Γò╡         [32m~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[32m30 04 2026 20:27:29.700:INFO [karma-server]: [39mKarma v6.4.4 server started at http://localhost:9876/
+[32m30 04 2026 20:27:29.701:INFO [launcher]: [39mLaunching browsers ChromeHeadless with concurrency unlimited
+[32m30 04 2026 20:27:29.723:INFO [launcher]: [39mStarting browser ChromeHeadless
+[32m30 04 2026 20:27:32.283:INFO [Chrome Headless 147.0.0.0 (Windows 10)]: [39mConnected on socket ZI9DQRBE6C9j_-RXAAAB with id 10270868
+Chrome Headless 147.0.0.0 (Windows 10): Executed 0 of 57[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 1 of 57[32m SUCCESS[39m (0 secs / 0.02 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 2 of 57[32m SUCCESS[39m (0 secs / 0.026 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 3 of 57[32m SUCCESS[39m (0 secs / 0.03 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 4 of 57[32m SUCCESS[39m (0 secs / 0.033 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 5 of 57[32m SUCCESS[39m (0 secs / 0.039 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 6 of 57[32m SUCCESS[39m (0 secs / 0.043 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 7 of 57[32m SUCCESS[39m (0 secs / 0.047 secs)
+[1A[2KWARN: [36m'Spec 'WorkoutService getWorkouts should handle errors correctly' has no expectations.'[39m
+Chrome Headless 147.0.0.0 (Windows 10): Executed 7 of 57[32m SUCCESS[39m (0 secs / 0.047 secs)
+WARN: 'Spec 'WorkoutService getWorkouts should handle errors correctly' has no expectations.'
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 8 of 57[32m SUCCESS[39m (0 secs / 0.054 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 9 of 57[32m SUCCESS[39m (0 secs / 0.057 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) LoginComponent should handle login error correctly FAILED[39m
+	TypeError: this.router.createUrlTree is not a function
+	    at _RouterLink.get urlTree [as urlTree] (node_modules/@angular/router/fesm2022/router_module.mjs:380:28)
+	    at _RouterLink.updateHref (node_modules/@angular/router/fesm2022/router_module.mjs:358:30)
+	    at _RouterLink.ngOnChanges (node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at refreshView (node_modules/@angular/core/fesm2022/debug_node.mjs:10183:21)
+	    at detectChangesInView (node_modules/@angular/core/fesm2022/debug_node.mjs:10388:9)
+Chrome Headless 147.0.0.0 (Windows 10): Executed 10 of 57[31m (1 FAILED)[39m (0 secs / 0.883 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) LoginComponent should toggle password visibility FAILED[39m
+	TypeError: this.router.createUrlTree is not a function
+	    at _RouterLink.get urlTree [as urlTree] (node_modules/@angular/router/fesm2022/router_module.mjs:380:28)
+	    at _RouterLink.updateHref (node_modules/@angular/router/fesm2022/router_module.mjs:358:30)
+	    at _RouterLink.ngOnChanges (node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at refreshView (node_modules/@angular/core/fesm2022/debug_node.mjs:10183:21)
+	    at detectChangesInView (node_modules/@angular/core/fesm2022/debug_node.mjs:10388:9)
+Chrome Headless 147.0.0.0 (Windows 10): Executed 11 of 57[31m (2 FAILED)[39m (0 secs / 0.895 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) LoginComponent should show error when form is invalid and submitted FAILED[39m
+	TypeError: this.router.createUrlTree is not a function
+	    at _RouterLink.get urlTree [as urlTree] (node_modules/@angular/router/fesm2022/router_module.mjs:380:28)
+	    at _RouterLink.updateHref (node_modules/@angular/router/fesm2022/router_module.mjs:358:30)
+	    at _RouterLink.ngOnChanges (node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at refreshView (node_modules/@angular/core/fesm2022/debug_node.mjs:10183:21)
+	    at detectChangesInView (node_modules/@angular/core/fesm2022/debug_node.mjs:10388:9)
+Chrome Headless 147.0.0.0 (Windows 10): Executed 12 of 57[31m (3 FAILED)[39m (0 secs / 0.908 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) LoginComponent should call authService.login when form is valid FAILED[39m
+	TypeError: this.router.createUrlTree is not a function
+	    at _RouterLink.get urlTree [as urlTree] (node_modules/@angular/router/fesm2022/router_module.mjs:380:28)
+	    at _RouterLink.updateHref (node_modules/@angular/router/fesm2022/router_module.mjs:358:30)
+	    at _RouterLink.ngOnChanges (node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at refreshView (node_modules/@angular/core/fesm2022/debug_node.mjs:10183:21)
+	    at detectChangesInView (node_modules/@angular/core/fesm2022/debug_node.mjs:10388:9)
+Chrome Headless 147.0.0.0 (Windows 10): Executed 13 of 57[31m (4 FAILED)[39m (0 secs / 0.922 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) LoginComponent should initialize the form FAILED[39m
+	TypeError: this.router.createUrlTree is not a function
+	    at _RouterLink.get urlTree [as urlTree] (node_modules/@angular/router/fesm2022/router_module.mjs:380:28)
+	    at _RouterLink.updateHref (node_modules/@angular/router/fesm2022/router_module.mjs:358:30)
+	    at _RouterLink.ngOnChanges (node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at refreshView (node_modules/@angular/core/fesm2022/debug_node.mjs:10183:21)
+	    at detectChangesInView (node_modules/@angular/core/fesm2022/debug_node.mjs:10388:9)
+Chrome Headless 147.0.0.0 (Windows 10): Executed 14 of 57[31m (5 FAILED)[39m (0 secs / 0.933 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 15 of 57[31m (5 FAILED)[39m (0 secs / 0.94 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 16 of 57[31m (5 FAILED)[39m (0 secs / 0.944 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 17 of 57[31m (5 FAILED)[39m (0 secs / 0.948 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) ProgressService getProgressHistory should fetch progress history successfully FAILED[39m
+	Expected spy ApiService.get to have been called with:
+	  [ <jasmine.stringMatching(/\/progress/)>, <jasmine.any(Object)> ]
+	but actual calls were:
+	  [ '/progress?userId=1&period=weekly' ].
+	
+	Call 0:
+	  Expected $.length = 1 to equal 2.
+	  Expected $[1] = undefined to equal <jasmine.any(Object)>.
+	Error: Expected spy ApiService.get to have been called with:
+	  [ <jasmine.stringMatching(/\/progress/)>, <jasmine.any(Object)> ]
+	but actual calls were:
+	  [ '/progress?userId=1&period=weekly' ].
+	Call 0:
+	  Expected $.length = 1 to equal 2.
+	  Expected $[1] = undefined to equal <jasmine.any(Object)>.
+	    at <Jasmine>
+	    at UserContext.<anonymous> (src/app/core/services/progress.service.spec.ts:57:33)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:398:28)
+	    at _ProxyZoneSpec.onInvoke (node_modules/zone.js/fesm2015/zone-testing.js:2132:39)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:397:34)
+Chrome Headless 147.0.0.0 (Windows 10): Executed 18 of 57[31m (6 FAILED)[39m (0 secs / 0.954 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 19 of 57[31m (6 FAILED)[39m (0 secs / 0.956 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 20 of 57[31m (6 FAILED)[39m (0 secs / 0.959 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 21 of 57[31m (6 FAILED)[39m (0 secs / 0.961 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) LayoutComponent should apply dark class when theme is dark FAILED[39m
+	TypeError: Cannot read properties of null (reading 'classList')
+	    at UserContext.<anonymous> (src/app/shared/components/layout/layout.component.spec.ts:50:20)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:398:28)
+	    at _ProxyZoneSpec.onInvoke (node_modules/zone.js/fesm2015/zone-testing.js:2132:39)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:397:34)
+	    at ZoneImpl.run (node_modules/zone.js/fesm2015/zone.js:113:43)
+	    at runInTestZone (node_modules/zone.js/fesm2015/zone-testing.js:216:38)
+	    at UserContext.<anonymous> (node_modules/zone.js/fesm2015/zone-testing.js:234:32)
+	    at <Jasmine>
+Chrome Headless 147.0.0.0 (Windows 10): Executed 22 of 57[31m (7 FAILED)[39m (0 secs / 1.088 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 23 of 57[31m (7 FAILED)[39m (0 secs / 1.101 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) LayoutComponent should render header and sidebar FAILED[39m
+	Expected null to be truthy.
+	    at <Jasmine>
+	    at UserContext.<anonymous> (src/app/shared/components/layout/layout.component.spec.ts:43:51)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:398:28)
+	    at _ProxyZoneSpec.onInvoke (node_modules/zone.js/fesm2015/zone-testing.js:2132:39)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:397:34)
+Chrome Headless 147.0.0.0 (Windows 10): Executed 24 of 57[31m (8 FAILED)[39m (0 secs / 1.116 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) DashboardComponent should display user greeting FAILED[39m
+	TypeError: Cannot read properties of undefined (reading 'pipe')
+	    at DashboardComponent2.loadData (src/app/features/dashboard/components/dashboard.component.ts:68:42)
+	    at DashboardComponent2.ngOnInit (src/app/features/dashboard/components/dashboard.component.ts:59:10)
+	    at callHookInternal (node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/@angular/core/fesm2022/debug_node.mjs:887:13)
+	    at callHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at refreshView (node_modules/@angular/core/fesm2022/debug_node.mjs:10183:21)
+	    at detectChangesInView (node_modules/@angular/core/fesm2022/debug_node.mjs:10388:9)
+	    at detectChangesInViewWhileDirty (node_modules/@angular/core/fesm2022/debug_node.mjs:10077:9)
+	    at detectChangesInternal (node_modules/@angular/core/fesm2022/debug_node.mjs:10065:9)
+Chrome Headless 147.0.0.0 (Windows 10): Executed 25 of 57[31m (9 FAILED)[39m (0 secs / 1.206 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) DashboardComponent should display correct stats from progress service FAILED[39m
+	TypeError: Cannot read properties of undefined (reading 'pipe')
+	    at DashboardComponent2.loadData (src/app/features/dashboard/components/dashboard.component.ts:68:42)
+	    at DashboardComponent2.ngOnInit (src/app/features/dashboard/components/dashboard.component.ts:59:10)
+	    at callHookInternal (node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/@angular/core/fesm2022/debug_node.mjs:887:13)
+	    at callHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at refreshView (node_modules/@angular/core/fesm2022/debug_node.mjs:10183:21)
+	    at detectChangesInView (node_modules/@angular/core/fesm2022/debug_node.mjs:10388:9)
+	    at detectChangesInViewWhileDirty (node_modules/@angular/core/fesm2022/debug_node.mjs:10077:9)
+	    at detectChangesInternal (node_modules/@angular/core/fesm2022/debug_node.mjs:10065:9)
+Chrome Headless 147.0.0.0 (Windows 10): Executed 26 of 57[31m (10 FAILED)[39m (0 secs / 1.215 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) DashboardComponent should create FAILED[39m
+	TypeError: Cannot read properties of undefined (reading 'pipe')
+	    at DashboardComponent2.loadData (src/app/features/dashboard/components/dashboard.component.ts:68:42)
+	    at DashboardComponent2.ngOnInit (src/app/features/dashboard/components/dashboard.component.ts:59:10)
+	    at callHookInternal (node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/@angular/core/fesm2022/debug_node.mjs:887:13)
+	    at callHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at refreshView (node_modules/@angular/core/fesm2022/debug_node.mjs:10183:21)
+	    at detectChangesInView (node_modules/@angular/core/fesm2022/debug_node.mjs:10388:9)
+	    at detectChangesInViewWhileDirty (node_modules/@angular/core/fesm2022/debug_node.mjs:10077:9)
+	    at detectChangesInternal (node_modules/@angular/core/fesm2022/debug_node.mjs:10065:9)
+Chrome Headless 147.0.0.0 (Windows 10): Executed 27 of 57[31m (11 FAILED)[39m (0 secs / 1.222 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) DashboardComponent should show empty state when no workouts available FAILED[39m
+	TypeError: Cannot read properties of undefined (reading 'pipe')
+	    at DashboardComponent2.loadData (src/app/features/dashboard/components/dashboard.component.ts:68:42)
+	    at DashboardComponent2.ngOnInit (src/app/features/dashboard/components/dashboard.component.ts:59:10)
+	    at callHookInternal (node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/@angular/core/fesm2022/debug_node.mjs:887:13)
+	    at callHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at refreshView (node_modules/@angular/core/fesm2022/debug_node.mjs:10183:21)
+	    at detectChangesInView (node_modules/@angular/core/fesm2022/debug_node.mjs:10388:9)
+	    at detectChangesInViewWhileDirty (node_modules/@angular/core/fesm2022/debug_node.mjs:10077:9)
+	    at detectChangesInternal (node_modules/@angular/core/fesm2022/debug_node.mjs:10065:9)
+Chrome Headless 147.0.0.0 (Windows 10): Executed 28 of 57[31m (12 FAILED)[39m (0 secs / 1.229 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 29 of 57[31m (12 FAILED)[39m (0 secs / 1.234 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) ThemeService should toggle theme FAILED[39m
+	Expected false to be true.
+	    at <Jasmine>
+	    at UserContext.<anonymous> (src/app/core/services/theme.service.spec.ts:38:65)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:398:28)
+	    at _ProxyZoneSpec.onInvoke (node_modules/zone.js/fesm2015/zone-testing.js:2132:39)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:397:34)
+Chrome Headless 147.0.0.0 (Windows 10): Executed 30 of 57[31m (13 FAILED)[39m (0 secs / 1.239 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) ThemeService should persist theme in localStorage FAILED[39m
+	Expected spy setItem to have been called with:
+	  [ 'super-fitness-theme', 'dark' ]
+	but it was never called.
+	    at <Jasmine>
+	    at UserContext.<anonymous> (src/app/core/services/theme.service.spec.ts:48:34)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:398:28)
+	    at _ProxyZoneSpec.onInvoke (node_modules/zone.js/fesm2015/zone-testing.js:2132:39)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:397:34)
+Chrome Headless 147.0.0.0 (Windows 10): Executed 31 of 57[31m (14 FAILED)[39m (0 secs / 1.243 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) ThemeService should load theme from localStorage on init FAILED[39m
+	Error: NG0203: The `AuthService2` token injection failed. `inject()` function must be called from an injection context such as a constructor, a factory function, a field initializer, or a function used with `runInInjectionContext`. Find more at https://v20.angular.dev/errors/NG0203
+	error properties: Object({ code: -203 })
+	    at injectInjectorOnly (node_modules/@angular/core/fesm2022/root_effect_scheduler.mjs:1039:15)
+	    at ╔╡╔╡inject (node_modules/@angular/core/fesm2022/root_effect_scheduler.mjs:1061:42)
+	    at inject2 (node_modules/@angular/core/fesm2022/root_effect_scheduler.mjs:1149:12)
+	    at ThemeService2.<instance_members_initializer> (src/app/core/services/theme.service.ts:11:34)
+	    at new ThemeService2 (src/app/core/services/theme.service.ts:20:3)
+	    at UserContext.<anonymous> (src/app/core/services/theme.service.spec.ts:54:24)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:398:28)
+	    at _ProxyZoneSpec.onInvoke (node_modules/zone.js/fesm2015/zone-testing.js:2132:39)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:397:34)
+	    at ZoneImpl.run (node_modules/zone.js/fesm2015/zone.js:113:43)
+Chrome Headless 147.0.0.0 (Windows 10): Executed 32 of 57[31m (15 FAILED)[39m (0 secs / 1.261 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 33 of 57[31m (15 FAILED)[39m (0 secs / 1.265 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 34 of 57[31m (15 FAILED)[39m (0 secs / 1.275 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 35 of 57[31m (15 FAILED)[39m (0 secs / 1.284 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 36 of 57[31m (15 FAILED)[39m (0 secs / 1.292 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 37 of 57[31m (15 FAILED)[39m (0 secs / 1.3 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 38 of 57[31m (15 FAILED)[39m (0 secs / 1.322 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 39 of 57[31m (15 FAILED)[39m (0 secs / 1.336 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 40 of 57[31m (15 FAILED)[39m (0 secs / 1.339 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 41 of 57[31m (15 FAILED)[39m (0 secs / 1.342 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 42 of 57[31m (15 FAILED)[39m (0 secs / 1.346 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 43 of 57[31m (15 FAILED)[39m (0 secs / 1.349 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 44 of 57[31m (15 FAILED)[39m (0 secs / 1.352 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 45 of 57[31m (15 FAILED)[39m (0 secs / 1.357 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 46 of 57[31m (15 FAILED)[39m (0 secs / 1.359 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 47 of 57[31m (15 FAILED)[39m (0 secs / 1.361 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 48 of 57[31m (15 FAILED)[39m (0 secs / 1.363 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 49 of 57[31m (15 FAILED)[39m (0 secs / 1.368 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 50 of 57[31m (15 FAILED)[39m (0 secs / 1.37 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 51 of 57[31m (15 FAILED)[39m (0 secs / 1.372 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 52 of 57[31m (15 FAILED)[39m (0 secs / 1.375 secs)
+[1A[2K[31mChrome Headless 147.0.0.0 (Windows 10) ApiService should set error state on request failure FAILED[39m
+	Expected true to be false.
+	    at <Jasmine>
+	    at Object.error (src/app/core/services/api.service.spec.ts:66:35)
+	    at ConsumerObserver.error (node_modules/rxjs/dist/esm/internal/Subscriber.js:102:33)
+	    at SafeSubscriber._error (node_modules/rxjs/dist/esm/internal/Subscriber.js:64:30)
+	    at SafeSubscriber.error (node_modules/rxjs/dist/esm/internal/Subscriber.js:40:18)
+Chrome Headless 147.0.0.0 (Windows 10): Executed 53 of 57[31m (16 FAILED)[39m (0 secs / 1.379 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 54 of 57[31m (16 FAILED)[39m (0 secs / 1.381 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 55 of 57[31m (16 FAILED)[39m (0 secs / 1.383 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 56 of 57[31m (16 FAILED)[39m (0 secs / 1.385 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 57 of 57[31m (16 FAILED)[39m (0 secs / 1.387 secs)
+[1A[2KChrome Headless 147.0.0.0 (Windows 10): Executed 57 of 57[31m (16 FAILED)[39m (1.513 secs / 1.387 secs)
+[31mTOTAL: 16 FAILED, 41 SUCCESS[39m

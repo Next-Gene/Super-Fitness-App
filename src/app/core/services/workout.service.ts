@@ -1,5 +1,5 @@
 import { Injectable, inject, signal, OnDestroy } from '@angular/core';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, of } from 'rxjs';
 import { tap, map, catchError } from 'rxjs/operators';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
@@ -272,11 +272,4 @@ export class WorkoutService implements OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-}
-
-function of<T>(value: T): Observable<T> {
-  return new Observable(subscriber => {
-    subscriber.next(value);
-    subscriber.complete();
-  });
 }

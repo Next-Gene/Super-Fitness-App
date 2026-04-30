@@ -1,9 +1,6 @@
 .page-container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
   padding: 2rem;
   position: relative;
-  overflow: hidden;
 }
 
 .page-background {
@@ -23,7 +20,7 @@
 .shape-1 {
   width: 500px;
   height: 500px;
-  background: #e94560;
+  background: var(--color-primary);
   top: -150px;
   right: -100px;
 }
@@ -31,7 +28,7 @@
 .shape-2 {
   width: 400px;
   height: 400px;
-  background: #0f3460;
+  background: var(--color-secondary);
   bottom: -100px;
   left: -100px;
 }
@@ -50,12 +47,12 @@
 .header-text h1 {
   font-size: 2rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-main);
   margin-bottom: 0.5rem;
 }
 
 .header-text p {
-  color: #a0a0a0;
+  color: var(--text-muted);
   font-size: 1rem;
 }
 
@@ -73,22 +70,23 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-card);
+  border: 1px solid var(--border-main);
   border-radius: 12px;
+  box-shadow: var(--shadow-main);
 }
 
 .search-box svg {
   width: 20px;
   height: 20px;
-  color: #a0a0a0;
+  color: var(--text-muted);
 }
 
 .search-box input {
   flex: 1;
   background: transparent;
   border: none;
-  color: #fff;
+  color: var(--text-main);
   font-size: 0.95rem;
   outline: none;
 }
@@ -104,17 +102,18 @@
 
 .filter-group select {
   padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-card);
+  border: 1px solid var(--border-main);
   border-radius: 12px;
-  color: #fff;
+  color: var(--text-main);
   font-size: 0.9rem;
   cursor: pointer;
   outline: none;
+  box-shadow: var(--shadow-main);
 }
 
 .filter-group select:focus {
-  border-color: #e94560;
+  border-color: var(--color-primary);
 }
 
 .filter-group select option {
@@ -129,13 +128,14 @@
 }
 
 .workout-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-card);
+  border: 1px solid var(--border-main);
   border-radius: 16px;
   overflow: hidden;
   backdrop-filter: blur(10px);
   animation: fadeInUp 0.5s ease forwards;
   opacity: 0;
+  box-shadow: var(--shadow-main);
 }
 
 @keyframes fadeInUp {
@@ -160,18 +160,18 @@
 }
 
 .workout-image.no-image {
-  &.strength, &.chest { background: linear-gradient(135deg, #dc2626, #b91c1c); }
-  &.cardio { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
-  &.hiit { background: linear-gradient(135deg, #ea580c, #c2410c); }
-  &.flexibility { background: linear-gradient(135deg, #9333ea, #7e22ce); }
+  &.strength, &.chest { background: linear-gradient(135deg, #dc2626, #991b1b); }
+  &.cardio { background: linear-gradient(135deg, #2563eb, #1e40af); }
+  &.hiit { background: linear-gradient(135deg, #ea580c, #9a3412); }
+  &.flexibility { background: linear-gradient(135deg, #9333ea, #6b21a8); }
   &.balance { background: linear-gradient(135deg, #0d9488, #0f766e); }
-  &.recovery { background: linear-gradient(135deg, #00ff88, #00cc6a); }
+  &.recovery { background: linear-gradient(135deg, #10b981, #047857); }
   &.back { background: linear-gradient(135deg, #1e40af, #3b82f6); }
-  &.legs, &.legs { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
-  &.shoulders { background: linear-gradient(135deg, #0891b2, #06b6d4); }
-  &.arms { background: linear-gradient(135deg, #be185d, #ec4899); }
-  &.stomach, &.core { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
-  &.full-body, &.home-workout { background: linear-gradient(135deg, #e94560, #ff6b6b); }
+  &.legs, &.legs { background: linear-gradient(135deg, #7c3aed, #5b21b6); }
+  &.shoulders { background: linear-gradient(135deg, #0891b2, #155e75); }
+  &.arms { background: linear-gradient(135deg, #be185d, #9d174d); }
+  &.stomach, &.core { background: linear-gradient(135deg, #f59e0b, #b45309); }
+  &.full-body, &.home-workout { background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); }
 }
 
 .image-overlay {
@@ -212,7 +212,7 @@
 }
 
 .workout-card:hover .play-icon {
-  background: #e94560;
+  background: var(--color-primary);
   transform: scale(1.1);
 }
 
@@ -266,13 +266,13 @@
 .workout-body h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-main);
   margin-bottom: 0.5rem;
 }
 
 .workout-body p {
   font-size: 0.8rem;
-  color: #a0a0a0;
+  color: var(--text-muted);
   line-height: 1.5;
   margin-bottom: 1rem;
   display: -webkit-box;
@@ -298,7 +298,7 @@
 .workout-stats .value {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .workout-stats .label {
@@ -309,10 +309,10 @@
 .start-btn {
   width: 100%;
   padding: 0.875rem;
-  background: linear-gradient(135deg, #e94560, #ff6b6b);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   border: none;
   border-radius: 10px;
-  color: #fff;
+  color: var(--text-inverse);
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
@@ -349,7 +349,7 @@
 
 .empty-state h3 {
   font-size: 1.25rem;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
 }
 
@@ -403,10 +403,10 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #e94560, #ff6b6b);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   border: none;
   border-radius: 10px;
-  color: #fff;
+  color: var(--text-inverse);
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
@@ -440,15 +440,15 @@
 }
 
 .create-form-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-card);
+  border: 1px solid var(--border-main);
   border-radius: 16px;
   padding: 2rem;
   backdrop-filter: blur(10px);
 
   h2 {
     font-size: 1.5rem;
-    color: #fff;
+    color: var(--text-main);
     margin-bottom: 1.5rem;
   }
 
@@ -481,7 +481,7 @@
       transition: border-color 0.2s;
 
       &:focus {
-        border-color: #e94560;
+        border-color: var(--color-primary);
       }
 
       &::placeholder {
@@ -529,10 +529,10 @@
   .create-btn {
     width: 100%;
     padding: 1rem;
-    background: linear-gradient(135deg, #e94560, #ff6b6b);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
     border: none;
     border-radius: 10px;
-    color: #fff;
+    color: var(--text-inverse);
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;

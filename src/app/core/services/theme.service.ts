@@ -1,69 +1,74 @@
-import { Injectable, signal, computed, effect, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Injectable, signal, computed, effect, inject } from '@angular/core';
+import { AuthService } from './auth.service';
 
 export type Theme = 'light' | 'dark';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ThemeService implements OnDestroy {
-  private readonly themeSubject = new BehaviorSubject<Theme>('dark');
-  private readonly destroy$ = new Subject<void>();
-
-  private readonly _theme = signal<Theme>('dark');
-  private readonly _isDark = signal<boolean>(true);
-
+export class ThemeService {
+  private readonly STORAGE_KEY = 'super-fitness-theme';
+  private readonly authService = inject(AuthService);
+  
+  // Internal state using signals
+  private readonly _theme = signal<Theme>('light');
+  
+  // Public API
   readonly theme = this._theme.asReadonly();
-  readonly isDark = this._isDark.asReadonly();
-
-  readonly isDarkMode = computed(() => this._isDark());
+  readonly isDarkMode = computed(() => this._theme() === 'dark');
 
   constructor() {
-    this.loadStoredTheme();
-    this.applyTheme();
+    this.initializeTheme();
+    
+    // Sync theme with Auth state reactively - only on transition
+    let previousAuthState: boolean | undefined;
+    effect(() => {
+      const isAuthenticated = this.authService.isAuthenticated();
+      if (previousAuthState !== isAuthenticated) {
+        previousAuthState = isAuthenticated;
+        if (isAuthenticated) {
+          this.setTheme('dark');
+        } else {
+          this.setTheme('light');
+        }
+      }
+    });
+
+    // Reactive effect to apply the theme class to the document root
+    effect(() => {
+      const currentTheme = this._theme();
+      this.applyThemeToDocument(currentTheme);
+      localStorage.setItem(this.STORAGE_KEY, currentTheme);
+    });
   }
 
-  private loadStoredTheme(): void {
-    const storedTheme = localStorage.getItem('theme') as Theme;
-    if (storedTheme === 'light' || storedTheme === 'dark') {
+  private initializeTheme(): void {
+    const storedTheme = localStorage.getItem(this.STORAGE_KEY) as Theme;
+    const isAuthenticated = this.authService.isAuthenticated();
+
+    if (storedTheme && (storedTheme === 'light' || storedTheme === 'dark')) {
       this._theme.set(storedTheme);
-      this._isDark.set(storedTheme === 'dark');
-      this.themeSubject.next(storedTheme);
     } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      this.setTheme(prefersDark ? 'dark' : 'light');
+      this._theme.set(isAuthenticated ? 'dark' : 'light');
     }
   }
 
-  private applyTheme(): void {
-    effect(() => {
-      const isDark = this._isDark();
-      if (isDark) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    });
+  private applyThemeToDocument(theme: Theme): void {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+      root.style.colorScheme = 'dark';
+    } else {
+      root.classList.remove('dark');
+      root.style.colorScheme = 'light';
+    }
+  }
+
+  toggleTheme(): void {
+    this._theme.update(current => current === 'dark' ? 'light' : 'dark');
   }
 
   setTheme(theme: Theme): void {
     this._theme.set(theme);
-    this._isDark.set(theme === 'dark');
-    this.themeSubject.next(theme);
-    localStorage.setItem('theme', theme);
-  }
-
-  toggleTheme(): void {
-    const newTheme = this._theme() === 'dark' ? 'light' : 'dark';
-    this.setTheme(newTheme);
-  }
-
-  getTheme(): Theme {
-    return this._theme();
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

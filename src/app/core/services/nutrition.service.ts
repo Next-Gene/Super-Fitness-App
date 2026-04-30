@@ -225,7 +225,7 @@ export class NutritionService implements OnDestroy {
       return of(this.getDefaultDailyNutrition());
     }
 
-    return this.api.get<any>(`/progress?userId=${userId}&period=weekly`).pipe(
+    return this.api.get<any>('/progress', { userId, period: 'weekly' }).pipe(
       tap(response => {
         const nutrition = this.getDefaultDailyNutrition();
         

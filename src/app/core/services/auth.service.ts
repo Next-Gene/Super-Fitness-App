@@ -1,8 +1,9 @@
 import { Injectable, signal, computed, inject, OnDestroy } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 import { ApiResponse, LoginRequest, LoginResponse, RegisterRequest, User } from '../models';
 
 @Injectable({
@@ -11,7 +12,7 @@ import { ApiResponse, LoginRequest, LoginResponse, RegisterRequest, User } from 
 export class AuthService implements OnDestroy {
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
-  private readonly API_URL = 'http://localhost:8088/api/auth';
+  private readonly API_URL = `${environment.baseUrl}/auth`;
 
   private readonly userSubject = new BehaviorSubject<User | null>(null);
   private readonly tokenSubject = new BehaviorSubject<string | null>(null);

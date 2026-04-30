@@ -126,7 +126,7 @@ import { AuthService } from '../../../../core/services/auth.service';
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    background: var(--bg-main);
     padding: 1rem;
     position: relative;
     overflow: hidden;
@@ -166,14 +166,15 @@ import { AuthService } from '../../../../core/services/auth.service';
     width: 100%;
     max-width: 520px;
     padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
     border-radius: 16px;
     backdrop-filter: blur(10px);
     position: relative;
     z-index: 10;
     max-height: 90vh;
     overflow-y: auto;
+    box-shadow: var(--shadow-main);
   }
 
   .logo-section {
@@ -184,7 +185,7 @@ import { AuthService } from '../../../../core/services/auth.service';
   .logo-icon {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #e94560, #ff6b6b);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
     border-radius: 10px;
     display: inline-flex;
     align-items: center;
@@ -197,12 +198,12 @@ import { AuthService } from '../../../../core/services/auth.service';
   .logo-section h1 {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-main);
     margin-bottom: 0.25rem;
   }
 
   .logo-section p {
-    color: #a0a0a0;
+    color: var(--text-muted);
     font-size: 0.8rem;
   }
 
@@ -220,7 +221,7 @@ import { AuthService } from '../../../../core/services/auth.service';
     display: block;
     font-size: 0.75rem;
     font-weight: 500;
-    color: #d1d5db;
+    color: var(--text-main);
     margin-bottom: 0.25rem;
   }
 
@@ -228,10 +229,10 @@ import { AuthService } from '../../../../core/services/auth.service';
   .form-group select {
     width: 100%;
     padding: 0.6rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-card);
+    border: 1px solid var(--border-main);
     border-radius: 6px;
-    color: #fff;
+    color: var(--text-main);
     font-size: 0.85rem;
     transition: all 0.2s;
     box-sizing: border-box;
@@ -240,12 +241,13 @@ import { AuthService } from '../../../../core/services/auth.service';
   .form-group input:focus,
   .form-group select:focus {
     outline: none;
-    border-color: #e94560;
-    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-primary);
+    background: var(--bg-card);
   }
 
   .form-group input::placeholder {
-    color: #6b7280;
+    color: var(--text-muted);
+    opacity: 0.6;
   }
 
   .form-group select {
@@ -253,8 +255,8 @@ import { AuthService } from '../../../../core/services/auth.service';
   }
 
   .form-group select option {
-    background: #1a1a2e;
-    color: #fff;
+    background: var(--bg-card);
+    color: var(--text-main);
   }
 
   .error-message {
@@ -270,10 +272,10 @@ import { AuthService } from '../../../../core/services/auth.service';
   .btn-primary {
     width: 100%;
     padding: 0.75rem;
-    background: linear-gradient(135deg, #e94560, #ff6b6b);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
     border: none;
     border-radius: 8px;
-    color: #fff;
+    color: var(--text-on-dark);
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
@@ -283,7 +285,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 
   .btn-primary:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(233, 69, 96, 0.4);
+    box-shadow: 0 5px 20px rgba(14, 165, 233, 0.4);
   }
 
   .btn-primary:disabled {
@@ -294,12 +296,12 @@ import { AuthService } from '../../../../core/services/auth.service';
   .login-link {
     text-align: center;
     margin-top: 1rem;
-    color: #a0a0a0;
+    color: var(--text-muted);
     font-size: 0.8rem;
   }
 
   .login-link a {
-    color: #e94560;
+    color: var(--color-primary);
     font-weight: 500;
     text-decoration: none;
     margin-left: 0.25rem;
